@@ -1,11 +1,11 @@
 package fr.demos.poe.projet.librairie.metier;
 
-public class lignePanier {
+public class LignePanier {
 	
 	Article article;
 	int quantite;
 	
-	public lignePanier(Article article, int quantite){
+	public LignePanier(Article article, int quantite){
 		this.article=article;
 		this.quantite=quantite;
 	}
@@ -26,4 +26,35 @@ public class lignePanier {
 		this.article = article;
 	}
 
+	@Override
+	public String toString() {
+		return "lignePanier [article=" + article + ", quantite=" + quantite + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((article == null) ? 0 : article.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LignePanier other = (LignePanier) obj;
+		if (article == null) {
+			if (other.article != null)
+				return false;
+		} else if (!article.equals(other.article))
+			return false;
+		return true;
+	}
+	
+	
 }

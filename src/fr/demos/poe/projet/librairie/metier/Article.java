@@ -116,10 +116,6 @@ public abstract class Article {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(prixHT);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
 		return result;
 	}
@@ -132,13 +128,6 @@ public abstract class Article {
 		if (getClass() != obj.getClass())
 			return false;
 		Article other = (Article) obj;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (Double.doubleToLongBits(prixHT) != Double.doubleToLongBits(other.prixHT))
-			return false;
 		if (ref == null) {
 			if (other.ref != null)
 				return false;
@@ -146,5 +135,5 @@ public abstract class Article {
 			return false;
 		return true;
 	}
-
+	
 }

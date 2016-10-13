@@ -15,6 +15,27 @@ public class Main {
 	
 	System.out.println(l1);
 	System.out.println(l2);
+	
+	Panier p1=new Panier();
+	
+	
+	
+	
+	
+	p1.ajouterArticle(l1,2);
+	p1.ajouterArticle(l2,3);
+	
+	System.out.println(p1);
+	
+	p1.diminuerQuantite(l2);
+	
+	System.out.println(p1);
+	
+	
+	
+	
+	
+	
 	}
 
 }
