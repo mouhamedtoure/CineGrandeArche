@@ -109,7 +109,7 @@ public abstract class Article {
 		}
 
 		else {
-			return "Article [ref=" + ref + ", prixHT=" + prixHT + ", nom=" + nom + ", image=" + image + ", materiel=" + materiel + ", neuf=" + neuf + "]";
+			return "Article [ref=" + ref + ", prixHT=" + prixHT + ", nom=" + nom + ", image=" + image + ", demat=" + demat + "]";
 		}
 
 	}
