@@ -22,8 +22,7 @@ public abstract class Article {
 		this.demat = demat;
 
 	}
-	public Article(String ref, double prixHT, String nom, String image, Materialise materiel,
-			boolean neuf) {
+	public Article(String ref, double prixHT, String nom, String image, Materialise materiel, boolean neuf) {
 		// TODO Auto-generated constructor stub
 		super();
 		this.ref = ref;
@@ -112,6 +111,40 @@ public abstract class Article {
 			return "Article [ref=" + ref + ", prixHT=" + prixHT + ", nom=" + nom + ", image=" + image + ", demat=" + demat + "]";
 		}
 
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(prixHT);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Article other = (Article) obj;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (Double.doubleToLongBits(prixHT) != Double.doubleToLongBits(other.prixHT))
+			return false;
+		if (ref == null) {
+			if (other.ref != null)
+				return false;
+		} else if (!ref.equals(other.ref))
+			return false;
+		return true;
 	}
 
 }
