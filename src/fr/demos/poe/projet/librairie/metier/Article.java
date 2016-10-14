@@ -9,42 +9,46 @@ public abstract class Article {
 	private String image;
 	private Dematerialise demat;
 	private Materialise materiel;
-	private boolean neuf;
 	private Etat etat;
+
+	// Constructeur d'un article demateralise
+
+	public Article(String ref, double prixHT, String nom, String format, String url) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.ref = ref;
+		this.prixHT = prixHT;
+		this.nom = nom;
+		this.demat = new Dematerialise(format, url);
+
+	}
+
+	// Constructeur d'un article materialise d'occasion
+
+	public Article(String ref, double prixHT, String nom, Etat etat, Integer stock) {
+
+		// TODO Auto-generated constructor stub
+		super();
+		this.ref = ref;
+		this.prixHT = prixHT;
+		this.nom = nom;
+		this.materiel = new Materialise(stock);
+
+	}
+
+	// Constructeur d'un article materialise neuf
+
+	public Article(String ref, double prixHT, String nom, Integer stock) {
+
+		// TODO Auto-generated constructor stub
+		super();
+		this.ref = ref;
+		this.prixHT = prixHT;
+		this.nom = nom;
+		this.materiel = new Materialise(stock);
+
+	}
 	
-	public Article(String ref, double prixHT, String nom, String image, Dematerialise demat) {
-		// TODO Auto-generated constructor stub
-		super();
-		this.ref = ref;
-		this.prixHT = prixHT;
-		this.nom = nom;
-		this.image = image;
-		this.demat = demat;
-
-	}
-	public Article(String ref, double prixHT, String nom, String image, Materialise materiel, boolean neuf) {
-		// TODO Auto-generated constructor stub
-		super();
-		this.ref = ref;
-		this.prixHT = prixHT;
-		this.nom = nom;
-		this.image = image;
-		this.materiel = materiel;
-		this.neuf = true;
-
-	}
-
-	public Article(String ref, double prixHT, String nom, String image, Materialise materiel, boolean neuf, Etat etat) {
-		// TODO Auto-generated constructor stub
-		super();
-		this.ref = ref;
-		this.prixHT = prixHT;
-		this.nom = nom;
-		this.image = image;
-		this.materiel = materiel;
-		this.neuf = false;
-		this.etat=etat;
-	}
 
 	public String getRef() {
 		return ref;
@@ -86,32 +90,21 @@ public abstract class Article {
 		this.image = image;
 	}
 
-	public boolean isNeuf() {
-		return neuf;
-	}
-	
-	
-	
-
 	public Etat getEtat() {
 		return etat;
 	}
+
 	public void setEtat(Etat etat) {
 		this.etat = etat;
 	}
+
+	
+
 	@Override
 	public String toString() {
-
-		if (demat == null) {
-
-			return "Article [ref=" + ref + ", prixHT=" + prixHT + ", nom=" + nom + ", image=" + image + ", materiel=" + materiel + ", neuf=" + neuf + "]";
-		}
-
-		else {
-			return "Article [ref=" + ref + ", prixHT=" + prixHT + ", nom=" + nom + ", image=" + image + ", demat=" + demat + "]";
-		}
-
+		return "ref=" + ref + ", prixHT=" + prixHT +", " + nom +" " ;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,6 +112,7 @@ public abstract class Article {
 		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -135,5 +129,21 @@ public abstract class Article {
 			return false;
 		return true;
 	}
-	
+
+	public Dematerialise getDemat() {
+		return demat;
+	}
+
+	public void setDemat(Dematerialise demat) {
+		this.demat = demat;
+	}
+
+	public Materialise getMateriel() {
+		return materiel;
+	}
+
+	public void setMateriel(Materialise materiel) {
+		this.materiel = materiel;
+	}
+
 }

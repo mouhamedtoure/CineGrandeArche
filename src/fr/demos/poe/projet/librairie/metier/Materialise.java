@@ -2,32 +2,23 @@ package fr.demos.poe.projet.librairie.metier;
 
 public class Materialise {
 
-	private Etat etat;
 	private Integer stock;
 	private double delai;
 	
-	public Materialise(Etat etat, int stock,double delai ) {
+	public Materialise(Integer stock, double delaiLivraison) {
 		// TODO Auto-generated constructor stub
-		
-		this.etat=etat;
+	
 		this.stock=stock;
-		this.delai=delai;
+		this.delai=delaiLivraison;
 		
 	}
 
-	public Etat getEtat() {
-		return etat;
-	}
 
-	public void setEtat(Etat etat) {
-		this.etat = etat;
-	}
 
-	public int getStock() {
-		return stock;
-	}
 
-	public void setStock(int stock) {
+
+	public Materialise(Integer stock) {
+		super();
 		this.stock = stock;
 	}
 
@@ -39,10 +30,31 @@ public class Materialise {
 		this.delai = delai;
 	}
 
+
+
+
+
+	public Integer getStock() {
+		return stock;
+	}
+
+
+
+
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+
+
+
+
 	@Override
 	public String toString() {
-		return "Materialise [etat=" + etat + ", stock=" + stock + ", delai=" + delai + "]";
+		return "Materialise [stock=" + stock + ", delai=" + delai + "]";
 	}
+
 
 	
 	

@@ -7,37 +7,52 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		Livre l1 = new Livre("123456", 10.99, "L'etranger", Etat.COMME_NEUF, 10, "Camus", "Hachette");
+		Livre l2 = new Livre("234567", 15.99, "Madame Bovary", "pdf", "url de telechargement", "Flaubert", "Belin");
+		// System.out.println(l1);
+		// System.out.println(l2);
+
+		Panier p1 = new Panier();
+
+		try {
+
+			p1.ajouterArticle(l1, 4);
+
+		} catch (StockException e1) {
+			// TODO Auto-generated catch block
+			System.out.println(e1.getMessage() + " ," + " Stock restant:" +e1.stockRestant);
+		}
+		
+
+		try {
+
+			p1.ajouterArticle(l1, 7);
+
+		} catch (StockException e2) {
+			System.out.println(e2.getMessage() + " ," + " Stock restant:" +e2.stockRestant);
+		}
 	
-	Livre l1= new Livre("123456",10.99, "TomTom", "lien image", new Materialise( Etat.COMME_NEUF,10,1), true);
-	
-	Livre l2= new Livre("234567", 9.99, "Martine au village", "lien image", new Dematerialise("pdf","url de telechargement"));
-	
-	System.out.println(l1);
-	System.out.println(l2);
-	
-	Panier p1=new Panier();
-	
-	
-	
-	
-	
-	p1.ajouterArticle(l1,2);
-	p1.ajouterArticle(l2,3);
-	
-	System.out.println(p1);
-	
-	p1.diminuerQuantite(l2);
-	
-	System.out.println(p1);
-	
-	// Il faut commenter ses fichiers java
-	
-	
-	
-	
-	
-	
+
+		System.out.println(l1.getMateriel());
+
+		try {
+
+			p1.ajouterArticle(l2, 3);
+		} catch (StockException e3) {
+			System.out.println(e3.getMessage() + " ," + " Stock restant:" +e3.stockRestant);
+		}
+
+		System.out.println(p1);
+
+		p1.diminuerQuantite(l2);
+
+		System.out.println(p1);
+
+		p1.modifierQuantite(l1, 10);
+
+		System.out.println(p1);
+
 	}
 
 }

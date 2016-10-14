@@ -5,20 +5,23 @@ public class ArticleDivers extends Article {
 	
 	String type;
 
-	public ArticleDivers(String ref, double prixHT, String nom, String image, Dematerialise demat, String type) {
-		super(ref, prixHT, nom, image, demat);
-		// TODO Auto-generated constructor stub
+	public ArticleDivers(String ref, double prixHT, String nom, Etat etat, Integer stock, String type) {
+		super(ref, prixHT, nom, etat, stock);
 		
 		this.type=type;
+	
 	}
 
-	public ArticleDivers(String ref, double prixHT, String nom, String image, Materialise materiel,
-			boolean neuf, String type) {
-		super(ref, prixHT, nom, image, materiel, neuf);
-		// TODO Auto-generated constructor stub
-		
+	public ArticleDivers(String ref, double prixHT, String nom, Integer stock, String type) {
+		super(ref, prixHT, nom, stock);
 		this.type=type;
-		
+	
+	}
+
+	public ArticleDivers(String ref, double prixHT, String nom, String format, String url, String type) {
+		super(ref, prixHT, nom, format, url);
+		this.type=type;
+	
 	}
 
 	public String getType() {
@@ -28,5 +31,7 @@ public class ArticleDivers extends Article {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	
 
 }

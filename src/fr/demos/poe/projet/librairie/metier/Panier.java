@@ -21,10 +21,37 @@ public class Panier {
 
 	}
 
-	public void ajouterArticle(Article a, int quantite) {
+	public void ajouterArticle(Article a, int quantite) throws StockException {
 
-		LignePanier lp = new LignePanier(a, quantite);
-		this.listeAchat.add(lp);
+		if (a.getDemat() == null) {
+
+			LignePanier lp = new LignePanier(a, quantite);
+			int indexLignePanier = this.listeAchat.indexOf(lp);
+			int stockDispo = this.listeAchat.get(indexLignePanier).article.getMateriel().getStock();
+
+	/*		if (stock < quantite) {
+
+				StockException se = new StockException(a, a.getMateriel().getStock(),
+						"La quantite demandee est superieure au stock disponible");
+
+				throw se;
+
+			}
+
+			else {
+				
+				this.listeAchat.add(lp);
+
+			   
+
+			}*/
+		}
+		if (a.getDemat() != null) {
+			LignePanier lp = new LignePanier(a, quantite);
+			this.listeAchat.add(lp);
+
+		}
+
 	}
 
 	public void supprimerLigne(Article a, int quantite) {
@@ -32,31 +59,37 @@ public class Panier {
 		LignePanier lp = new LignePanier(a, quantite);
 		this.listeAchat.remove(lp);
 	}
-	
-	
 
 	public void diminuerQuantite(Article a) {
-		LignePanier lpArticleRecherche = new LignePanier(a,0);
-		if(this.listeAchat.contains(lpArticleRecherche)){
-			int i= this.listeAchat.indexOf(lpArticleRecherche);
-			int k= this.listeAchat.get(i).getQuantite();
-			this.listeAchat.get(i).setQuantite(k-1);
+		LignePanier lpArticleRecherche = new LignePanier(a, 0);
+		if (this.listeAchat.contains(lpArticleRecherche)) {
+			int i = this.listeAchat.indexOf(lpArticleRecherche);
+			int k = this.listeAchat.get(i).getQuantite();
+			this.listeAchat.get(i).setQuantite(k - 1);
 		}
-			
-
-		
 
 	}
-	public void augmenterQuantite(Article a){
-		
-		LignePanier lpArticleRecherche = new LignePanier(a,0);
-		if(this.listeAchat.contains(lpArticleRecherche)){
-			int i= this.listeAchat.indexOf(lpArticleRecherche);
-			int k= this.listeAchat.get(i).getQuantite();
-			this.listeAchat.get(i).setQuantite(k+1);
-		
+
+	public void augmenterQuantite(Article a) {
+
+		LignePanier lpArticleRecherche = new LignePanier(a, 0);
+		if (this.listeAchat.contains(lpArticleRecherche)) {
+			int i = this.listeAchat.indexOf(lpArticleRecherche);
+			int k = this.listeAchat.get(i).getQuantite();
+			this.listeAchat.get(i).setQuantite(k + 1);
+
 		}
+	}
+
+	public void modifierQuantite(Article a, int quantite) {
+
+		LignePanier lpArticleRecherche = new LignePanier(a, quantite);
+		if (this.listeAchat.contains(lpArticleRecherche)) {
+			int i = this.listeAchat.indexOf(lpArticleRecherche);
+			this.listeAchat.get(i).setQuantite(quantite);
 		}
+
+	}
 
 	public ArrayList<LignePanier> getListeAchat() {
 		return listeAchat;
