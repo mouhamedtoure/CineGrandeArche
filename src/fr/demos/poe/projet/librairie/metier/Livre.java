@@ -10,25 +10,23 @@ public class Livre extends Article {
 	private LocalDate dateParution;
 	private String editeur;
 	private String genre;
-	
-	
+
 	// Constructeur d'un livre materialise d'occasion
-	
+
 	public Livre(String ref, double prixHT, String nom, Etat etat, Integer stock, String auteur, String editeur) {
 		super(ref, prixHT, nom, etat, stock);
 		this.auteur = auteur;
 		this.editeur = editeur;
 	}
-	
+
 	// Constructeur d'un livre materialise neuf
-	
+
 	public Livre(String ref, double prixHT, String nom, Integer stock, String auteur, String editeur) {
 		super(ref, prixHT, nom, stock);
 		this.auteur = auteur;
 		this.editeur = editeur;
 	}
-	
-	
+
 	// Constructeur d'un livre dematerialise
 
 	public Livre(String ref, double prixHT, String nom, String format, String url, String auteur, String editeur) {
@@ -36,10 +34,6 @@ public class Livre extends Article {
 		this.auteur = auteur;
 		this.editeur = editeur;
 	}
-
-
-
-
 
 	public String getIsbn() {
 		return isbn;
@@ -93,7 +87,6 @@ public class Livre extends Article {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -113,12 +106,8 @@ public class Livre extends Article {
 
 	@Override
 	public String toString() {
-		return super.toString()+ " [auteur=" + auteur + ", editeur=" + editeur + "]";
+		return super.toString() + "(" + auteur + ", " + editeur + ")";
+
 	}
 
-	
-	
-
-	
-	
 }

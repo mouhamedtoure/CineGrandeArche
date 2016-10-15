@@ -27,7 +27,6 @@ public abstract class Article {
 
 	public Article(String ref, double prixHT, String nom, Etat etat, Integer stock) {
 
-		// TODO Auto-generated constructor stub
 		super();
 		this.ref = ref;
 		this.prixHT = prixHT;
@@ -40,7 +39,6 @@ public abstract class Article {
 
 	public Article(String ref, double prixHT, String nom, Integer stock) {
 
-		// TODO Auto-generated constructor stub
 		super();
 		this.ref = ref;
 		this.prixHT = prixHT;
@@ -48,7 +46,6 @@ public abstract class Article {
 		this.materiel = new Materialise(stock);
 
 	}
-	
 
 	public String getRef() {
 		return ref;
@@ -98,11 +95,9 @@ public abstract class Article {
 		this.etat = etat;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "ref=" + ref + ", prixHT=" + prixHT +", " + nom +" " ;
+		return "ref=" + ref + ", prixHT=" + prixHT + ", " + nom + " ";
 	}
 
 	@Override

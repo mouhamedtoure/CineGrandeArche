@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class Panier {
 
 	private Compte compte;
-	private ArrayList<LignePanier> listeAchat;
+	private ArrayList<LignePanier> lignePaniers;
 	private double prixTotal;
 
 	public Panier() {
-		// TODO Auto-generated constructor
-		this.listeAchat = new ArrayList<LignePanier>();
+		
+		this.lignePaniers = new ArrayList<LignePanier>();
 
 	}
 
 	public Panier(Compte compte) {
 
 		this.compte = compte;
-		this.listeAchat = new ArrayList<LignePanier>();
+		this.lignePaniers = new ArrayList<LignePanier>();
 
 	}
 
@@ -25,11 +25,9 @@ public class Panier {
 
 		if (a.getDemat() == null) {
 
-			LignePanier lp = new LignePanier(a, quantite);
-			int indexLignePanier = this.listeAchat.indexOf(lp);
-			int stockDispo = this.listeAchat.get(indexLignePanier).article.getMateriel().getStock();
+			int stockDispo = a.getMateriel().getStock();
 
-	/*		if (stock < quantite) {
+			if (stockDispo < quantite) {
 
 				StockException se = new StockException(a, a.getMateriel().getStock(),
 						"La quantite demandee est superieure au stock disponible");
@@ -39,64 +37,49 @@ public class Panier {
 			}
 
 			else {
-				
-				this.listeAchat.add(lp);
 
-			   
+				LignePanier lp = new LignePanier(a, quantite);
+				this.lignePaniers.add(lp);
 
-			}*/
+			}
 		}
 		if (a.getDemat() != null) {
 			LignePanier lp = new LignePanier(a, quantite);
-			this.listeAchat.add(lp);
+			this.lignePaniers.add(lp);
 
 		}
 
 	}
 
-	public void supprimerLigne(Article a, int quantite) {
+	public void modifierQuantite(Article a, int quantite) throws QuantiteException {
 
-		LignePanier lp = new LignePanier(a, quantite);
-		this.listeAchat.remove(lp);
-	}
+		if (quantite < 0) {
+			QuantiteException qe = new QuantiteException("Quantite saisie non autorisee");
 
-	public void diminuerQuantite(Article a) {
-		LignePanier lpArticleRecherche = new LignePanier(a, 0);
-		if (this.listeAchat.contains(lpArticleRecherche)) {
-			int i = this.listeAchat.indexOf(lpArticleRecherche);
-			int k = this.listeAchat.get(i).getQuantite();
-			this.listeAchat.get(i).setQuantite(k - 1);
+			throw qe;
+		}
+
+
+			LignePanier lpArticleRecherche = new LignePanier(a, quantite);
+			if (this.lignePaniers.contains(lpArticleRecherche)) {
+				int i = this.lignePaniers.indexOf(lpArticleRecherche);
+				this.lignePaniers.get(i).setQuantite(quantite);
+
 		}
 
 	}
-
-	public void augmenterQuantite(Article a) {
-
-		LignePanier lpArticleRecherche = new LignePanier(a, 0);
-		if (this.listeAchat.contains(lpArticleRecherche)) {
-			int i = this.listeAchat.indexOf(lpArticleRecherche);
-			int k = this.listeAchat.get(i).getQuantite();
-			this.listeAchat.get(i).setQuantite(k + 1);
-
-		}
-	}
-
-	public void modifierQuantite(Article a, int quantite) {
-
-		LignePanier lpArticleRecherche = new LignePanier(a, quantite);
-		if (this.listeAchat.contains(lpArticleRecherche)) {
-			int i = this.listeAchat.indexOf(lpArticleRecherche);
-			this.listeAchat.get(i).setQuantite(quantite);
-		}
-
+	public void vider(){
+		
+		this.lignePaniers.clear();
+		
 	}
 
 	public ArrayList<LignePanier> getListeAchat() {
-		return listeAchat;
+		return lignePaniers;
 	}
 
 	public void setListeAchat(ArrayList<LignePanier> listeAchat) {
-		this.listeAchat = listeAchat;
+		this.lignePaniers = listeAchat;
 	}
 
 	public Compte getCompte() {
@@ -104,8 +87,11 @@ public class Panier {
 	}
 
 	@Override
+
 	public String toString() {
-		return "Panier [compte=" + compte + ", listeAchat=" + listeAchat + "]";
+
+		return "compte=" + compte + lignePaniers + "\n";
+
 	}
 
 	public double getPrixTotal() {

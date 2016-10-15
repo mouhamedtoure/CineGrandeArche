@@ -1,13 +1,13 @@
 package fr.demos.poe.projet.librairie.metier;
 
 class LignePanier {
-	
+
 	Article article;
 	int quantite;
-	
-	public LignePanier(Article article, int quantite){
-		this.article=article;
-		this.quantite=quantite;
+
+	public LignePanier(Article article, int quantite) {
+		this.article = article;
+		this.quantite = quantite;
 	}
 
 	public int getQuantite() {
@@ -28,7 +28,7 @@ class LignePanier {
 
 	@Override
 	public String toString() {
-		return "lignePanier [article=" + article + ", quantite=" + quantite + "]";
+		return "\n" + article + ", quantite=" + quantite;
 	}
 
 	@Override
@@ -55,6 +55,5 @@ class LignePanier {
 			return false;
 		return true;
 	}
-	
-	
+
 }
