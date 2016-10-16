@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class Panier {
 
 	private Compte compte;
-	private ArrayList<LignePanier> lignePaniers;
+	private ArrayList<LignePanier> lignesPanier;
 	private double prixTotal;
 
 	public Panier() {
 		
-		this.lignePaniers = new ArrayList<LignePanier>();
+		this.lignesPanier = new ArrayList<LignePanier>();
 
 	}
 
 	public Panier(Compte compte) {
 
 		this.compte = compte;
-		this.lignePaniers = new ArrayList<LignePanier>();
+		this.lignesPanier = new ArrayList<LignePanier>();
 
 	}
 
@@ -39,13 +39,13 @@ public class Panier {
 			else {
 
 				LignePanier lp = new LignePanier(a, quantite);
-				this.lignePaniers.add(lp);
+				this.lignesPanier.add(lp);
 
 			}
 		}
 		if (a.getDemat() != null) {
 			LignePanier lp = new LignePanier(a, quantite);
-			this.lignePaniers.add(lp);
+			this.lignesPanier.add(lp);
 
 		}
 
@@ -61,25 +61,25 @@ public class Panier {
 
 
 			LignePanier lpArticleRecherche = new LignePanier(a, quantite);
-			if (this.lignePaniers.contains(lpArticleRecherche)) {
-				int i = this.lignePaniers.indexOf(lpArticleRecherche);
-				this.lignePaniers.get(i).setQuantite(quantite);
+			if (this.lignesPanier.contains(lpArticleRecherche)) {
+				int i = this.lignesPanier.indexOf(lpArticleRecherche);
+				this.lignesPanier.get(i).setQuantite(quantite);
 
 		}
 
 	}
 	public void vider(){
 		
-		this.lignePaniers.clear();
+		this.lignesPanier.clear();
 		
 	}
 
 	public ArrayList<LignePanier> getListeAchat() {
-		return lignePaniers;
+		return lignesPanier;
 	}
 
 	public void setListeAchat(ArrayList<LignePanier> listeAchat) {
-		this.lignePaniers = listeAchat;
+		this.lignesPanier = listeAchat;
 	}
 
 	public Compte getCompte() {
@@ -90,7 +90,7 @@ public class Panier {
 
 	public String toString() {
 
-		return "compte=" + compte + lignePaniers + "\n";
+		return "compte=" + compte + lignesPanier + "\n";
 
 	}
 
