@@ -8,21 +8,19 @@ public class Catalogue {
 	private ArticleDivers divers;
 	private ArrayList<LigneCatalogue> lignesCatalogue;
 
-	public Catalogue(Article article) {
+	public Catalogue() {
 
-		super();
-
-		this.article = article;
-
+		this.lignesCatalogue= new ArrayList<LigneCatalogue>();
 	}
 
-	public Catalogue(ArticleDivers divers) {
-
-		super();
-		this.divers = divers;
-
+	
+	public void ajouter(Article a, int stock){
+		
+		LigneCatalogue lc= new LigneCatalogue(a, stock);
+		this.lignesCatalogue.add(lc);
+		
+		
 	}
-
 	public Article getArticle() {
 		return article;
 	}

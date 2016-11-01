@@ -8,10 +8,15 @@ public class Main {
 
 	public static void main(String[] args) {
 
+	
+		 
+		
 		Livre l1 = new Livre("123456", 10.99, "L'etranger", Etat.COMME_NEUF, 10, "Camus", "Hachette");
 		Livre l2 = new Livre("234567", 15.99, "Madame Bovary", "pdf", "url de telechargement", "Flaubert", "Belin");
 		Livre l3= new Livre("345678", 19.99, "Jurassic Park", 50, "Michael Crichton", "Pocket");
 		
+		Catalogue c= new Catalogue();
+		c.ajouter(l1, 10);
 		
 		
 		Panier p1 = new Panier();

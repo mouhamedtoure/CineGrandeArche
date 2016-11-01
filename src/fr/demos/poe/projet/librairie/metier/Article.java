@@ -14,7 +14,6 @@ public abstract class Article {
 	// Constructeur d'un article demateralise
 
 	public Article(String ref, double prixHT, String nom, String format, String url) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.ref = ref;
 		this.prixHT = prixHT;

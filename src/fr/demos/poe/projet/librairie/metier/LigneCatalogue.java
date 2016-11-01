@@ -2,15 +2,16 @@ package fr.demos.poe.projet.librairie.metier;
 
 public class LigneCatalogue {
 	
-	Article a;
-	ArticleDivers divers;
+	Article article;
+	int stock;
 	
 	
-	public LigneCatalogue(Article a){
+	public LigneCatalogue(Article a, int stock){
 		
 		if(a.getDemat()==null){
 			
-			a.getNom();
+			this.article=a;
+			this.stock=a.getMateriel().getStock();
 			
 		}
 	}
