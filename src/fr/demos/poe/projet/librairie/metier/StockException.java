@@ -8,7 +8,7 @@ public class StockException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 	Article article;
-	int stockRestant;
+	public int stockRestant;
 
 	public StockException(Article article, Integer stockRestant, String message) {
 
