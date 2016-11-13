@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Livre extends Article {
 
 	private String isbn;
+	private String titre;
 	private String format;
 	private String auteur;
 	private LocalDate dateParution;
@@ -108,6 +109,14 @@ public class Livre extends Article {
 	public String toString() {
 		return super.toString() + "(" + auteur + ", " + editeur + ")";
 
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
 	}
 
 }

@@ -15,9 +15,7 @@ public class Main {
 		Livre l2 = new Livre("234567", 15.99, "Madame Bovary", "pdf", "url de telechargement", "Flaubert", "Belin");
 		Livre l3= new Livre("345678", 19.99, "Jurassic Park", 50, "Michael Crichton", "Pocket");
 		
-		Catalogue c= new Catalogue();
-		c.ajouter(l1, 10);
-		
+	
 		
 		Panier p1 = new Panier();
 

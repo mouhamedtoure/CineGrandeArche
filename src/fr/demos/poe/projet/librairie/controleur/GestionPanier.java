@@ -1,7 +1,6 @@
 package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,14 +14,14 @@ import fr.demos.poe.projet.librairie.metier.*;
 /**
  * Servlet implementation class AffichePanier
  */
-@WebServlet("/AffichePanier")
-public class AffichePanier extends HttpServlet {
+@WebServlet("/GestionPanier")
+public class GestionPanier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AffichePanier() {
+    public GestionPanier() {
         super();
         // TODO Auto-generated constructor stub
     }
