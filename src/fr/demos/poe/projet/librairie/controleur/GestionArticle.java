@@ -19,7 +19,7 @@ public class GestionArticle extends HttpServlet {
      */
     public GestionArticle() {
         super();
-        // TODO Auto-generated constructor stub
+ 
     }
 
 	/**
