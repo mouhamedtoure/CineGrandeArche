@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.demos.poe.projet.librairie.metier.*;
 
 /**
- * Servlet implementation class AffichePanier
+ * Servlet implementation class GestionPanier
  */
 @WebServlet("/GestionPanier")
 public class GestionPanier extends HttpServlet {
