@@ -70,7 +70,7 @@ public class GestionPanier extends HttpServlet {
 		try {
 			panier.modifierQuantite(l1, 10);
 
-		} catch (QuantiteException qe1) {
+		} catch (IllegalArgumentException qe1) {
 
 			System.out.println(qe1.getMessage());
 
@@ -79,7 +79,7 @@ public class GestionPanier extends HttpServlet {
 		try {
 			panier.modifierQuantite(l1, -10);
 
-		} catch (QuantiteException qe1) {
+		} catch (IllegalArgumentException qe1) {
 
 			System.out.println(qe1.getMessage());
 
@@ -92,7 +92,7 @@ public class GestionPanier extends HttpServlet {
 				
 				
 				// appel de la jsp
-				RequestDispatcher rd=request.getRequestDispatcher("/AffichePanier.jsp");
+				RequestDispatcher rd=request.getRequestDispatcher("Panier.jsp");
 				rd.forward(request, response);
 			
 		

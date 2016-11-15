@@ -3,7 +3,7 @@ package fr.demos.poe.projet.librairie.metier;
 public class ArticleDivers extends Article {
 	
 	
-	String type;
+	private String type;
 
 	public ArticleDivers(String ref, double prixHT, String nom, Etat etat, Integer stock, String type) {
 		super(ref, prixHT, nom, etat, stock);

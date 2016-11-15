@@ -1,4 +1,4 @@
-package fr.demos.poe.projet.librairie.metier;
+package fr.demos.poe.projet.librairie. metier;
 
 public class QuantiteException extends Exception {
 

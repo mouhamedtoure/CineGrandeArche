@@ -1,85 +1,95 @@
 package fr.demos.poe.projet.librairie.metier;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Panier {
 
 	private Compte compte;
-	private ArrayList<LignePanier> lignesPanier;
-	private double prixTotal;
+	private ArrayList<LignePanier> lignesPanier = new ArrayList<LignePanier>();
 
 	public Panier() {
-		
-		this.lignesPanier = new ArrayList<LignePanier>();
 
 	}
 
 	public Panier(Compte compte) {
 
 		this.compte = compte;
-		this.lignesPanier = new ArrayList<LignePanier>();
 
 	}
 
 	public void ajouterArticle(Article a, int quantite) throws StockException {
 
-		if (a.getDemat() == null) {
+		LignePanier lp = new LignePanier(a, quantite);
+		if (this.lignesPanier.contains(lp)) {
+			int index = lignesPanier.indexOf(lp);
+			lignesPanier.get(index).quantite += quantite;
+		} else {
 
-			int stockDispo = a.getMateriel().getStock();
+			if (a.getDemat() == null) {
+				int stockDispo = a.getMateriel().getStock();
 
-			if (stockDispo < quantite) {
+				if (stockDispo < quantite) {
 
-				StockException se = new StockException(a, a.getMateriel().getStock(),
-						"La quantite demandee est superieure au stock disponible");
+					StockException se = new StockException(a, a.getMateriel().getStock(),
+							"La quantite demandee est superieure au stock disponible");
 
-				throw se;
+					throw se;
 
+				}
+
+				else {
+
+					this.lignesPanier.add(lp);
+
+				}
 			}
-
-			else {
-
-				LignePanier lp = new LignePanier(a, quantite);
+			if (a.getDemat() != null) {
 				this.lignesPanier.add(lp);
 
 			}
 		}
-		if (a.getDemat() != null) {
-			LignePanier lp = new LignePanier(a, quantite);
-			this.lignesPanier.add(lp);
-
-		}
 
 	}
 
-	public void modifierQuantite(Article a, int quantite) throws QuantiteException {
+	public void modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
 
 		if (quantite < 0) {
-			QuantiteException qe = new QuantiteException("Quantite saisie non autorisee");
+			IllegalArgumentException qe = new IllegalArgumentException("Quantite saisie non autorisee");
 
 			throw qe;
 		}
 
-
-			LignePanier lpArticleRecherche = new LignePanier(a, quantite);
-			if (this.lignesPanier.contains(lpArticleRecherche)) {
-				int i = this.lignesPanier.indexOf(lpArticleRecherche);
-				this.lignesPanier.get(i).setQuantite(quantite);
+		LignePanier lpArticleRecherche = new LignePanier(a, quantite);
+		if (this.lignesPanier.contains(lpArticleRecherche)) {
+			int i = this.lignesPanier.indexOf(lpArticleRecherche);
+			this.lignesPanier.get(i).setQuantite(quantite);
 
 		}
 
 	}
-	public void vider(){
-		
+
+	public void vider() {
+
 		this.lignesPanier.clear();
+
+	}
+
+	// retourner plutôt un iterator
+	public Iterator<LignePanier> getListeAchat() {
 		
-	}
-
-	public ArrayList<LignePanier> getListeAchat() {
-		return lignesPanier;
-	}
-
-	public void setListeAchat(ArrayList<LignePanier> listeAchat) {
-		this.lignesPanier = listeAchat;
+		Iterator<LignePanier> i= this.lignesPanier.iterator();
+		
+		
+		while(i.hasNext()){
+			
+		LignePanier lp= i.next();
+		System.out.println(lp);
+		}
+		return i;
+		
+		
+		
 	}
 
 	public Compte getCompte() {
@@ -95,11 +105,15 @@ public class Panier {
 	}
 
 	public double getPrixTotal() {
-		return prixTotal;
-	}
+		
+		double prixTotal=0;
+		
+	 for(LignePanier lp: this.lignesPanier){
+		 
+		 prixTotal+= lp.article.getPrixHT()*lp.quantite;
+	 }
 
-	public void setPrixTotal(double prixTotal) {
-		this.prixTotal = prixTotal;
+		return prixTotal;
 	}
 
 }

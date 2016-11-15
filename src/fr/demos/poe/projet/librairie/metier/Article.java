@@ -96,7 +96,7 @@ public abstract class Article {
 
 	@Override
 	public String toString() {
-		return "ref=" + ref + ", prixHT=" + prixHT + ", " + nom + " ";
+		return  nom +","+ " prixHT=" + prixHT +" " ;
 	}
 
 	@Override
