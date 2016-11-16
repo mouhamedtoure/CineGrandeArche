@@ -3,11 +3,11 @@ package fr.demos.poe.projet.librairie.metier;
 public class Compte {
 
 	String email;
-	String motDePasse;
+	String motdepasse;
 
 	public Compte(String email, String motDePasse) {
 		this.email = email;
-		this.motDePasse = motDePasse;
+		this.motdepasse = motDePasse;
 	}
 
 	public String getEmail() {
@@ -19,11 +19,11 @@ public class Compte {
 	}
 
 	public String getMotDePasse() {
-		return motDePasse;
+		return motdepasse;
 	}
 
 	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+		this.motdepasse = motDePasse;
 	}
 
 }

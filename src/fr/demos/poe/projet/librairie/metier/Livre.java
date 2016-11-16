@@ -12,26 +12,19 @@ public class Livre extends Article {
 	private String editeur;
 	private String genre;
 
-	// Constructeur d'un livre materialise d'occasion
+	// Constructeur d'un livre materialise 
 
-	public Livre(String ref, double prixHT, String nom, Etat etat, Integer stock, String auteur, String editeur) {
-		super(ref, prixHT, nom, etat, stock);
+	public Livre(String ref, double prixHT, String nom, String image, Etat etat, Integer stock, String auteur, String editeur) {
+		super(ref, prixHT, nom, image, etat, stock);
 		this.auteur = auteur;
 		this.editeur = editeur;
 	}
 
-	// Constructeur d'un livre materialise neuf
-
-	public Livre(String ref, double prixHT, String nom, Integer stock, String auteur, String editeur) {
-		super(ref, prixHT, nom, stock);
-		this.auteur = auteur;
-		this.editeur = editeur;
-	}
 
 	// Constructeur d'un livre dematerialise
 
-	public Livre(String ref, double prixHT, String nom, String format, String url, String auteur, String editeur) {
-		super(ref, prixHT, nom, format, url);
+	public Livre(String ref, double prixHT, String nom, String image, String format, String url, String auteur, String editeur) {
+		super(ref, prixHT, nom, image, format, url);
 		this.auteur = auteur;
 		this.editeur = editeur;
 	}

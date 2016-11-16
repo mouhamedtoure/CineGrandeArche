@@ -13,36 +13,40 @@ public abstract class Article {
 
 	// Constructeur d'un article demateralise
 
-	public Article(String ref, double prixHT, String nom, String format, String url) {
+	public Article(String ref, double prixHT, String nom, String image, String format, String url) {
 		super();
 		this.ref = ref;
 		this.prixHT = prixHT;
 		this.nom = nom;
 		this.demat = new Dematerialise(format, url);
+		this.image= image;
+
 
 	}
 
 	// Constructeur d'un article materialise d'occasion
 
-	public Article(String ref, double prixHT, String nom, Etat etat, Integer stock) {
+	public Article(String ref, double prixHT, String nom, String image, Etat etat, Integer stock) {
 
 		super();
 		this.ref = ref;
 		this.prixHT = prixHT;
 		this.nom = nom;
 		this.materiel = new Materialise(stock);
+		this.image=image;
 
 	}
 
 	// Constructeur d'un article materialise neuf
 
-	public Article(String ref, double prixHT, String nom, Integer stock) {
+	public Article(String ref, double prixHT, String nom, String image, Integer stock) {
 
 		super();
 		this.ref = ref;
 		this.prixHT = prixHT;
 		this.nom = nom;
 		this.materiel = new Materialise(stock);
+		this.image=image;
 
 	}
 
@@ -140,4 +144,7 @@ public abstract class Article {
 		this.materiel = materiel;
 	}
 
+	
+	
+	
 }

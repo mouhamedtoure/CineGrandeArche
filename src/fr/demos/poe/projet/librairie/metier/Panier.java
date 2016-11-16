@@ -76,18 +76,13 @@ public class Panier {
 	}
 
 	// retourner plutôt un iterator
+	
 	public Iterator<LignePanier> getListeAchat() {
 		
-		Iterator<LignePanier> i= this.lignesPanier.iterator();
 		
-		
-		while(i.hasNext()){
-			
-		LignePanier lp= i.next();
-		System.out.println(lp);
-		}
-		return i;
-		
+		Iterator<LignePanier> iter = this.lignesPanier.iterator();
+		return iter; 
+	
 		
 		
 	}
