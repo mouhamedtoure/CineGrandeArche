@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Panier {
-
+	
+	private int compteur;
 	private Compte compte;
 	private ArrayList<LignePanier> lignesPanier = new ArrayList<LignePanier>();
 
@@ -20,6 +21,7 @@ public class Panier {
 
 	public void ajouterArticle(Article a, int quantite) throws StockException {
 
+		this.compteur+=quantite;
 		LignePanier lp = new LignePanier(a, quantite);
 		if (this.lignesPanier.contains(lp)) {
 			int index = lignesPanier.indexOf(lp);
@@ -64,14 +66,17 @@ public class Panier {
 		if (this.lignesPanier.contains(lpArticleRecherche)) {
 			int i = this.lignesPanier.indexOf(lpArticleRecherche);
 			this.lignesPanier.get(i).setQuantite(quantite);
+			this.compteur+=quantite;
 
 		}
+		
 
 	}
 
 	public void vider() {
 
 		this.lignesPanier.clear();
+		this.compteur=0;
 
 	}
 
@@ -109,6 +114,14 @@ public class Panier {
 	 }
 
 		return prixTotal;
+	}
+
+	public int getCompteur() {
+		return compteur;
+	}
+
+	public void setCompteur(int compteur) {
+		this.compteur = compteur;
 	}
 
 }

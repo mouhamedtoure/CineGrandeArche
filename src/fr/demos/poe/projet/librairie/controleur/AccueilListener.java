@@ -18,7 +18,8 @@ public class AccueilListener implements ServletContextListener, HttpSessionListe
 
 	
 	private Panier panier= new Panier();
-	int compteurPanier = 0;
+
+	
     /**
      * Default constructor. 
      */
@@ -33,7 +34,7 @@ public class AccueilListener implements ServletContextListener, HttpSessionListe
        
 
     	arg0.getSession().setAttribute("monPanier", panier);
-    	arg0.getSession().setAttribute("compteurPanier", compteurPanier);
+    	arg0.getSession().setAttribute("compteurPanier", panier.getCompteur());
     	
     	
     	
@@ -63,7 +64,7 @@ public class AccueilListener implements ServletContextListener, HttpSessionListe
        
     	
     	arg0.getServletContext().setAttribute("monPanier",panier);
-    	arg0.getServletContext().setAttribute("compteurPanier",compteurPanier);
+    	arg0.getServletContext().setAttribute("compteurPanier",panier.getCompteur());
     	}
 	
 }
