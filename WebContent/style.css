@@ -19,18 +19,16 @@ html, body{
 }
 
 #identification{
-	display: left;
+	 display: left;
    
 }
 
 
-#rechercheArticle{
+#Panier{
 
-    position: absolute;
-    top: 8px;
-    right: 16px;
-    font-size: 18px;
-   
+    text-align:center;
+    margin: 0 auto;
+    padding:0px;   
 }
 
 form .erreur{
@@ -38,3 +36,10 @@ form .erreur{
     color: #900;
 
 }
+
+#rechercheArticle{
+    text-align:center;
+    margin: 0 auto;
+    padding:0px;
+}
+

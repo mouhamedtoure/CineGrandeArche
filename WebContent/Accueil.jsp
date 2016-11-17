@@ -10,11 +10,10 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 	<div class="header">
 
 
-		<form id=identification action="GestionArticle" method="POST">
+		<form id="identification" action="GestionArticle" method="POST">
 			<label for="email">Adresse email</label> <input type="text"
 				value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
 			<label for="motdepasse">Mot de passe</label> <input type="password"
@@ -26,7 +25,7 @@
 		</form>
 
 
-		<form id=rechercheArticle action="" method="POST">
+		<form id="rechercheArticle" action="" method="POST">
 
 			<label for="rechercher"></label> <input type="text"
 				value="${Rechercher}" name="rechercher" /> <span class="rechercher"></span>
@@ -34,7 +33,7 @@
 
 		</form>
 
-
+		<div id="Panier">Panier (${compteurPanier})</div>
 
 	</div>
 
@@ -42,23 +41,25 @@
 
 
 	<ul>
+
+
 		<c:forEach var="article" items="${mesArticles}">
 
-			<img src="<c:url value='Images/${article.getImage()}'/>"
-				width="178" height="298"> ${article} <br />
+			<img src="<c:url value='Images/${article.getImage()}'/>" width="178"
+				height="298" />
+			${article.nom} (${article.prixHT} &euro;) 
+			<form action="GestionArticle" method="post">
+				<input type="hidden" name="Reference" value="${article.ref}">
+				<input type="submit" value="Ajouter" name="action" />
+			</form>
+			<br />
+
 		</c:forEach>
 
 
 
-
-
-		<%-- <img src="<c:url value='Images/Jurassicpark.jpg' />" width="178"
-			height="298"> ${livre3}
-		<br /> --%>
-
-
 	</ul>
-	
-	
+
+
 </body>
 </html>
