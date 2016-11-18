@@ -1,6 +1,8 @@
 package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.demos.poe.projet.librairie.metier.*;
 
@@ -33,28 +36,24 @@ public class GestionPanier extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
-		
-		
-		Panier panier= new Panier();
-		
-		
-	    request.setAttribute("monPanier", panier);
-				
-				
-				
-				
-				// appel de la jsp
-				RequestDispatcher rd=request.getRequestDispatcher("Panier.jsp");
-				rd.forward(request, response);
-			
-		
+	
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		HttpSession session = request.getSession();
+		Panier panier = (Panier) session.getAttribute("monPanier");
+		
+
+			// appel de la jsp
+ 
+			RequestDispatcher rd=request.getRequestDispatcher("Panier.jsp");
+			rd.forward(request, response);
+		
+	
+			 	
 	}
 
 }

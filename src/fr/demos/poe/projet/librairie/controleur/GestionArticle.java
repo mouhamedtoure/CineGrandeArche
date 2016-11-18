@@ -1,9 +1,9 @@
 package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,9 +38,10 @@ public class GestionArticle extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+
 		ArrayList<Article> mesArticles = new ArrayList<Article>();
 
-		Livre l1 = new Livre("123456", 10.99, "L'etranger", "Letranger.jpeg", Etat.COMME_NEUF, 10, "Camus", "Hachette");
+		Livre l1 = new Livre("123456", 10.99, "L'etranger", "Letranger.jpeg", Etat.COMME_NEUF, 0, "Camus", "Hachette");
 		Livre l2 = new Livre("234567", 15.99, "Madame Bovary", "Bovary.jpg", "pdf", "url de telechargement", "Flaubert",
 				"Belin");
 		Livre l3 = new Livre("345678", 19.99, "Jurassic Park", "Jurassicpark.jpg", Etat.NEUF, 50, "Michael Crichton",
@@ -66,59 +67,48 @@ public class GestionArticle extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		HttpSession session = request.getSession();
 
+		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		String reference = request.getParameter("Reference");
 		Panier panier = (Panier) session.getAttribute("monPanier");
+		Map<String, String> erreurs0 = new HashMap<String, String>();
 
+		@SuppressWarnings("unchecked")
 		ArrayList<Article> articlesP = (ArrayList<Article>) session.getAttribute("mesArticles");
 
 		if (action != null && action.equals("Ajouter")) {
 
 			// le panier existe peut-être déjà , utiliser une session
 
-			
+			for (Article a : articlesP) {
 
-			if (panier == null) {
+				if (a.getRef().equals(reference)) {
 
-				out.println("HELLLLLLLLLLLLLLO");
-				out.println("article: " + articlesP);
+					int index = articlesP.indexOf(a);
+	
+					try {
+						panier.ajouterArticle(articlesP.get(index), 1);
 
-				out.println("reference: " + reference);
-				panier = new Panier();
+					} catch (StockException e1) {
 
-				try {
-					panier.ajouterArticle(articlesP.get(0), 1);
-				
+						erreurs0.put(reference, e1.getMessage());
 
-				} catch (StockException e1) {
-					// TODO Auto-generated catch block
-					System.out.println(e1.getMessage() + " ," + " Stock restant:" + e1.stockRestant);
+					}
+					break;
 				}
-				out.println("panier: " + panier);
-			} else {
 
-				try {
-					panier.ajouterArticle(articlesP.get(0), 1);
-					
-
-				} catch (StockException e1) {
-					// TODO Auto-generated catch block
-					System.out.println(e1.getMessage() + " ," + " Stock restant:" + e1.stockRestant);
-
-				}
-				
 			}
-			
 
 		}
-		request.setAttribute("mesArticles", articlesP);
-		request.setAttribute("compteurPanier", panier.getCompteur());
 
-		RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
-		rd.forward(request, response);
+		
+		 request.setAttribute("erreurs0", erreurs0);
+		 session.setAttribute("compteurPanier", panier.getCompteur());
+		
+		 RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
+		 rd.forward(request, response);
 
 	}
+
 }

@@ -33,7 +33,7 @@
 
 		</form>
 
-		<div id="Panier">Panier (${compteurPanier})</div>
+		<a id="Panier" href="Panier.jsp">Panier (${compteurPanier})</a>
 
 	</div>
 
@@ -48,9 +48,12 @@
 			<img src="<c:url value='Images/${article.getImage()}'/>" width="178"
 				height="298" />
 			${article.nom} (${article.prixHT} &euro;) 
+			<c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if>
+			<span class="erreurs0">${erreurs0[article.ref]}</span>
 			<form action="GestionArticle" method="post">
 				<input type="hidden" name="Reference" value="${article.ref}">
 				<input type="submit" value="Ajouter" name="action" />
+
 			</form>
 			<br />
 

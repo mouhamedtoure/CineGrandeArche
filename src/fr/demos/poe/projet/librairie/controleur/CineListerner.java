@@ -14,16 +14,16 @@ import fr.demos.poe.projet.librairie.metier.Panier;
  *
  */
 @WebListener
-public class AccueilListener implements ServletContextListener, HttpSessionListener {
+public class CineListerner implements ServletContextListener, HttpSessionListener {
 
 	
-	private Panier panier= new Panier();
+	
 
 	
     /**
      * Default constructor. 
      */
-    public AccueilListener() {
+    public CineListerner() {
         // TODO Auto-generated constructor stub
     }
 
@@ -32,7 +32,7 @@ public class AccueilListener implements ServletContextListener, HttpSessionListe
      */
     public void sessionCreated(HttpSessionEvent arg0)  { 
        
-
+    	Panier panier= new Panier();
     	arg0.getSession().setAttribute("monPanier", panier);
     	arg0.getSession().setAttribute("compteurPanier", panier.getCompteur());
     	
@@ -47,6 +47,9 @@ public class AccueilListener implements ServletContextListener, HttpSessionListe
     public void sessionDestroyed(HttpSessionEvent arg0)  { 
          // TODO Auto-generated method stub
     	
+    	// Essayer de conserver le panier en memoire dans la base de donnees
+    	
+    	Panier panier = (Panier)arg0.getSession().getAttribute("monPanier");
     	panier.vider();
     }
 
@@ -63,8 +66,6 @@ public class AccueilListener implements ServletContextListener, HttpSessionListe
     public void contextInitialized(ServletContextEvent arg0)  { 
        
     	
-    	arg0.getServletContext().setAttribute("monPanier",panier);
-    	arg0.getServletContext().setAttribute("compteurPanier",panier.getCompteur());
     	}
 	
 }

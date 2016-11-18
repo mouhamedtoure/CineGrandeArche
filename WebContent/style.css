@@ -37,9 +37,16 @@ form .erreur{
 
 }
 
+.erreurs0{
+
+    color: #900;
+
+}
+
 #rechercheArticle{
     text-align:center;
     margin: 0 auto;
     padding:0px;
 }
+
 
