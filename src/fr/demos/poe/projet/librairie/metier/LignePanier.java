@@ -1,6 +1,6 @@
 package fr.demos.poe.projet.librairie.metier;
 
-class LignePanier {
+public class LignePanier {
 
 	Article article;
 	int quantite;

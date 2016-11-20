@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 public class Panier {
 
-	private int compteur;
 	private Compte compte;
 	private ArrayList<LignePanier> lignesPanier = new ArrayList<LignePanier>();
 
@@ -61,22 +60,20 @@ public class Panier {
 
 				// On augmente la quantite
 				lignesPanier.get(index).quantite += quantite;
+				// Pas de diminution de stock ici
 			}
 
 		}
-		// nouvel article ajouté au panier
-
+		// Sinon nouvel article à ajouter au panier
 		else {
 
 			// Si l'article est matérialisé
 
 			if (a.getDemat() == null) {
 
-				int stockDispo = a.getMateriel().getStock();
-
 				// Si le stock dispo est inferieur a la quantite
 
-				if (stockDispo < quantite) {
+				if (a.getMateriel().getStock() < quantite) {
 
 					StockException se = new StockException(a, a.getMateriel().getStock(),
 							"La quantite demandee est superieure au stock disponible");
@@ -96,14 +93,11 @@ public class Panier {
 
 			}
 			// Sinon l'article est dematerialise
-			if (a.getDemat() != null) {
+			else {
 				this.lignesPanier.add(lp);
 
 			}
 		}
-
-		// On incrémente le compteur du panier
-		this.compteur += quantite;
 
 	}
 
@@ -119,7 +113,6 @@ public class Panier {
 		if (this.lignesPanier.contains(lpArticleRecherche)) {
 			int i = this.lignesPanier.indexOf(lpArticleRecherche);
 			this.lignesPanier.get(i).setQuantite(quantite);
-			this.compteur += quantite;
 
 		}
 
@@ -128,7 +121,6 @@ public class Panier {
 	public void vider() {
 
 		this.lignesPanier.clear();
-		this.compteur = 0;
 
 	}
 
@@ -149,7 +141,7 @@ public class Panier {
 
 	public String toString() {
 
-		return "compte=" + compte + lignesPanier + "\n";
+		return lignesPanier + "\n";
 
 	}
 
@@ -159,18 +151,29 @@ public class Panier {
 
 		for (LignePanier lp : this.lignesPanier) {
 
-			prixTotal += lp.article.getPrixHT() * lp.quantite;
+			prixTotal += (double) lp.article.getPrixHT()*lp.quantite;
 		}
 
 		return prixTotal;
 	}
 
 	public int getCompteur() {
+		int compteur = 0;
+		for (LignePanier lp : this.lignesPanier) {
+
+			compteur += lp.getQuantite();
+
+		}
+
 		return compteur;
 	}
-
-	public void setCompteur(int compteur) {
-		this.compteur = compteur;
+	public int getNbArticles(){
+		int nbArticles=0;
+		for (Iterator<LignePanier> iterator = this.lignesPanier.iterator(); iterator.hasNext();) {
+			iterator.next();
+			nbArticles++;
+		}
+		return nbArticles;
+			
 	}
-
 }

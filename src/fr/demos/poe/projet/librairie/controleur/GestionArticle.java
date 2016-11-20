@@ -56,7 +56,7 @@ public class GestionArticle extends HttpServlet {
 
 		session.setAttribute("mesArticles", mesArticles);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 		rd.forward(request, response);
 
 	}
@@ -68,47 +68,7 @@ public class GestionArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		String action = request.getParameter("action");
-		String reference = request.getParameter("Reference");
-		Panier panier = (Panier) session.getAttribute("monPanier");
-		Map<String, String> erreurs0 = new HashMap<String, String>();
-
-		@SuppressWarnings("unchecked")
-		ArrayList<Article> articlesP = (ArrayList<Article>) session.getAttribute("mesArticles");
-
-		if (action != null && action.equals("Ajouter")) {
-
-			// le panier existe peut-être déjà , utiliser une session
-
-			for (Article a : articlesP) {
-
-				if (a.getRef().equals(reference)) {
-
-					int index = articlesP.indexOf(a);
-	
-					try {
-						panier.ajouterArticle(articlesP.get(index), 1);
-
-					} catch (StockException e1) {
-
-						erreurs0.put(reference, e1.getMessage());
-
-					}
-					break;
-				}
-
-			}
-
-		}
-
 		
-		 request.setAttribute("erreurs0", erreurs0);
-		 session.setAttribute("compteurPanier", panier.getCompteur());
-		
-		 RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
-		 rd.forward(request, response);
-
 	}
 
 }

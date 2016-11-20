@@ -33,7 +33,7 @@
 
 		</form>
 
-		<a id="Panier" href="Panier.jsp">Panier (${compteurPanier})</a>
+		<a id="Panier" href="PanierVue.jsp"> Panier (${compteurPanier})</a>
 
 	</div>
 
@@ -50,7 +50,7 @@
 			${article.nom} (${article.prixHT} &euro;) 
 			<c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if>
 			<span class="erreurs0">${erreurs0[article.ref]}</span>
-			<form action="GestionArticle" method="post">
+			<form action="GestionPanier" method="post">
 				<input type="hidden" name="Reference" value="${article.ref}">
 				<input type="submit" value="Ajouter" name="action" />
 
