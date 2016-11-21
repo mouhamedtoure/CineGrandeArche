@@ -51,7 +51,7 @@
 			 ${article.nom}, <c:if
 				test="${article.getClass().getSimpleName() == 'Livre' }"> ${article.auteur}  </c:if>  (${article.prixHT} &euro;) 
 			<c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if>
-			<form action="GestionPanier" method="post">
+			<form action="GestionArticle" method="post">
 				<input type="hidden" name="Reference" value="${article.ref}" /> <input
 					type="submit" value="Ajouter" name="action" /> <span
 					class="erreurs0">${erreurs0[article.ref]}</span>

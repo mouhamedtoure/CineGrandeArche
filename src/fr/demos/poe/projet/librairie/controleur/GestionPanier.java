@@ -58,13 +58,15 @@ public class GestionPanier extends HttpServlet {
 		
 		
 		String reference = request.getParameter("Reference");
+		int quantite = (int) session.getAttribute("quantite");
 		String action = request.getParameter("action");
 		Map<String, String> erreurs0 = new HashMap<String, String>();
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Article> articlesP = (ArrayList<Article>) session.getAttribute("mesArticles");
-
-		if (action != null && action.equals("Ajouter")) {
+		
+		
+		if (action != null && action.equals("Modifier")) {
 
 			// le panier existe peut-être déjà , utiliser une session
 
@@ -75,9 +77,10 @@ public class GestionPanier extends HttpServlet {
 					int index = articlesP.indexOf(a);
 
 					try {
-						panier.ajouterArticle(articlesP.get(index), 1);
+						panier.modifierQuantite(articlesP.get(index), quantite);
+						
 
-					} catch (StockException e1) {
+					} catch (IllegalArgumentException e1) {
 
 						erreurs0.put(reference, e1.getMessage());
 
@@ -89,9 +92,15 @@ public class GestionPanier extends HttpServlet {
 			
 
 		}
+		
+		Iterator<LignePanier> iter= panier.getListeAchat();
+			session.setAttribute("quantite",iter.next().getQuantite() );
+		
+		
 		request.setAttribute("erreurs0", erreurs0);
 		session.setAttribute("compteurPanier", panier.getCompteur());
-		RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
+
+		RequestDispatcher rd = request.getRequestDispatcher("/PanierVue.jsp");
 		rd.forward(request, response);
 	}
 	

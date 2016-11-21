@@ -69,7 +69,9 @@
 
 				<td>${listePanier.quantite}
 				
-				<input type="number" step="1" value="${listePanier.quantite}" min="0" max="64" /> </td>
+				<input type="number" step="1" value="${listePanier.quantite}" min="1" max="50" /> 
+				<input type="submit" value="Modifier" name="action" /> </td>
+				
 
 				<td>${listePanier.article.prixHT}&euro;</td>
 
