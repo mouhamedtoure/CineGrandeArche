@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -50,7 +50,9 @@
 			<th>Prix</th>
 			<th>Prix Total</th>
 
-			<td>${monPanier.getPrixTotal()} &euro;</td>
+			<td>${monPanier.getPrixTotal()}&euro;<br />
+			</td>
+
 		</tr>
 
 
@@ -60,13 +62,14 @@
 				<td>${listePanier.article.nom}
 					<form action="PanierVue.jsp" method="post">
 						<input type="hidden" name="ModifierArticle"
-							value="${listePanier.article.ref}"> <input type="submit"
-							value="Modifier quantité" name="action" />
+							value="${listePanier.article.ref}">
 
 					</form>
 				</td>
 
-				<td>${listePanier.quantite}</td>
+				<td>${listePanier.quantite}
+				
+				<input type="number" step="1" value="${listePanier.quantite}" min="0" max="64" /> </td>
 
 				<td>${listePanier.article.prixHT}&euro;</td>
 

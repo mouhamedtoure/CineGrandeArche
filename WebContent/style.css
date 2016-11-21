@@ -22,6 +22,10 @@ html, body {
 	display: left;
 }
 
+form {
+   display: inline-block;
+}
+
 #Panier {
 	text-align: center;
 	margin: 0 auto;
@@ -30,7 +34,11 @@ html, body {
 
 form .erreur {
 	color: #900;
+	margin: 0px;
+	padding: 0px;
 }
+
+
 
 .erreurs0 {
 	color: #900;
@@ -51,7 +59,8 @@ table {
 }
 
 td {
-	text-align: center; border-width : 2px;
+	text-align: center;
+	border-width: 3px;
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;

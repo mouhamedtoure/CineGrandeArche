@@ -15,7 +15,7 @@ public class Panier {
 	public Panier(Compte compte) {
 
 		this.compte = compte;
-
+	
 	}
 
 	public void ajouterArticle(Article a, int quantite) throws StockException {
@@ -142,7 +142,7 @@ public class Panier {
 	public String toString() {
 
 		return lignesPanier + "\n";
-
+		
 	}
 
 	public double getPrixTotal() {
@@ -151,7 +151,7 @@ public class Panier {
 
 		for (LignePanier lp : this.lignesPanier) {
 
-			prixTotal += (double) lp.article.getPrixHT()*lp.quantite;
+			prixTotal += lp.article.getPrixHT()* ((double)lp.quantite);
 		}
 
 		return prixTotal;

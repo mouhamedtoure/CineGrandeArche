@@ -2,8 +2,6 @@ package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
