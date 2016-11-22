@@ -101,7 +101,7 @@ public class Panier {
 
 	}
 
-	public void modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
+	public int modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
 
 		if (quantite < 0) {
 			IllegalArgumentException qe = new IllegalArgumentException("Quantite saisie non autorisee");
@@ -115,6 +115,7 @@ public class Panier {
 			this.lignesPanier.get(i).setQuantite(quantite);
 
 		}
+		return quantite;
 
 	}
 

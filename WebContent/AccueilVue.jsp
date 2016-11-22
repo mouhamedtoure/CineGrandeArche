@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,32 +38,43 @@
 	</div>
 
 
+	<table >
+
+		<tr>
 
 
-	<ul>
 
 
-		<c:forEach var="article" items="${mesArticles}">
 
-			<img src="<c:url value='Images/${article.getImage()}'/>" width="178"
-				height="298" />
-				
-			 ${article.nom}, <c:if
-				test="${article.getClass().getSimpleName() == 'Livre' }"> ${article.auteur}  </c:if>  (${article.prixHT} &euro;) 
-			<c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if>
-			<form action="GestionArticle" method="post">
-				<input type="hidden" name="Reference" value="${article.ref}" /> <input
-					type="submit" value="Ajouter" name="action" /> <span
-					class="erreurs0">${erreurs0[article.ref]}</span>
+		</tr>
+		<c:forEach items="${mesArticles}" var="article">
+			<tr>
+				<td><img src="<c:url value='Images/${article.getImage()}'/>"
+					width="178" height="298" /></td>
 
-			</form>
-			<br/>
+
+				<td>${article.nom}</td>
+				<td><c:if
+						test="${article.getClass().getSimpleName() == 'Livre' }"> ${article.auteur}  </c:if>
+				<td>${article.prixHT}&euro;</td>
+
+				<td><c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if>
+					<form action="GestionArticle" method="post">
+						<input type="hidden" name="Reference" value="${article.ref}" /> <input
+							type="submit" value="Ajouter" name="action" /> <span
+							class="erreurs0">${erreurs0[article.ref]}</span>
+					</form></td>
+			</tr>
+
+
 
 		</c:forEach>
 
+	</table>
 
 
-	</ul>
+
+
 
 
 </body>

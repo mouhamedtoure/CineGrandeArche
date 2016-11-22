@@ -52,16 +52,17 @@ form .erreur {
 
 table {
 	text-align: center;
-	border-width: 1px;
-	border-style: solid;
-	border-color: black;
+	border: 3px
 	width: 50%;
 }
 
 td {
 	text-align: center;
 	border-width: 3px;
-	border-style: solid;
-	border-color: black;
-	border-width: 1px;
+
+}
+
+td {
+	border-width: 3px;
+
 }

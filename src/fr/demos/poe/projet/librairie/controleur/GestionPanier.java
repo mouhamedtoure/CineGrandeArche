@@ -3,7 +3,6 @@ package fr.demos.poe.projet.librairie.controleur;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -53,19 +52,16 @@ public class GestionPanier extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		Panier panier = (Panier) session.getAttribute("monPanier");
-			
-		
-		
-		
+
 		String reference = request.getParameter("Reference");
-		int quantite = (int) session.getAttribute("quantite");
+
 		String action = request.getParameter("action");
 		Map<String, String> erreurs0 = new HashMap<String, String>();
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Article> articlesP = (ArrayList<Article>) session.getAttribute("mesArticles");
-		
-		
+		int newQuantite = 0;
+
 		if (action != null && action.equals("Modifier")) {
 
 			// le panier existe peut-être déjà , utiliser une session
@@ -77,8 +73,10 @@ public class GestionPanier extends HttpServlet {
 					int index = articlesP.indexOf(a);
 
 					try {
-						panier.modifierQuantite(articlesP.get(index), quantite);
 						
+						
+						panier.modifierQuantite(articlesP.get(index), newQuantite);
+
 
 					} catch (IllegalArgumentException e1) {
 
@@ -89,19 +87,15 @@ public class GestionPanier extends HttpServlet {
 				}
 
 			}
-			
-
 		}
 		
-		Iterator<LignePanier> iter= panier.getListeAchat();
-			session.setAttribute("quantite",iter.next().getQuantite() );
-		
-		
 		request.setAttribute("erreurs0", erreurs0);
+		session.setAttribute("newQuantite", newQuantite);
 		session.setAttribute("compteurPanier", panier.getCompteur());
+		session.setAttribute("PrixTOT", panier.getPrixTotal());
 
 		RequestDispatcher rd = request.getRequestDispatcher("/PanierVue.jsp");
 		rd.forward(request, response);
 	}
-	
+
 }
