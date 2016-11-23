@@ -50,8 +50,7 @@
 			<th>Prix</th>
 			<th>Prix Total</th>
 
-			<td>${monPanier.getPrixTotal()}&euro;<br />
-			</td>
+			<td>${monPanier.getPrixTotal()}&euro;</td>
 
 		</tr>
 
@@ -60,24 +59,21 @@
 		<c:forEach items="${monPanier.getListeAchat()}" var="listePanier">
 			<tr>
 				<td>${listePanier.article.nom}
-					<form action="PanierVue.jsp" method="post">
+					<form action="GestionPanier" method="post">
 						<input type="hidden" name="ModifierArticle"
 							value="${listePanier.article.ref}">
 
 					</form>
 				</td>
 
-				<td>
-				
-				
-				 <label for="name">${listePanier}</label>
-				<input type="number" step="1" value="${newQuantite}" min="1" max="50" /> 
-				<input type="submit" value="Modifier" name="action" /> </td>
-				
+				<td><label for="name">${listePanier}</label> <input
+					type="number" step="1" value="${newQuantite}" min="1" max="50" />
+					<input type="submit" value="Modifier" name="action" /></td>
+
 
 				<td>${listePanier.article.prixHT}&euro;</td>
 
-				<td>${PrixTOT} </td>
+				<td>${PrixTOT}</td>
 
 			</tr>
 
