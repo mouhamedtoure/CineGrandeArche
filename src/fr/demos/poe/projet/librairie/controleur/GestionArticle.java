@@ -76,6 +76,7 @@ public class GestionArticle extends HttpServlet {
 		String reference = request.getParameter("Reference");
 		String action = request.getParameter("action");
 		Map<String, String> erreurs0 = new HashMap<String, String>();
+		int k = 0;
 
 		if (action != null && action.equals("Ajouter")) {
 
@@ -85,22 +86,29 @@ public class GestionArticle extends HttpServlet {
 
 				if (a.getRef().equals(reference)) {
 
-					int index = articlesP.indexOf(a);
+					if (a.getDemat() == null || (a.getDemat() != null && k == 0)) {
 
-					try {
-						panier.ajouterArticle(articlesP.get(index), 1);
+						int index = articlesP.indexOf(a);
 
-					} catch (StockException e1) {
+						try {
+							panier.ajouterArticle(articlesP.get(index), 1);
+							k=1;
 
-						erreurs0.put(reference, e1.getMessage());
+						} catch (StockException e1) {
+
+							erreurs0.put(reference, e1.getMessage());
+
+						}
+
+						break;
 
 					}
-					break;
 				}
 
 			}
 
 		}
+
 		request.setAttribute("erreurs0", erreurs0);
 		session.setAttribute("compteurPanier", panier.getCompteur());
 		RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");

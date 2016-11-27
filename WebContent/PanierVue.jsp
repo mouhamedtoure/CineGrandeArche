@@ -39,18 +39,18 @@
 
 
 	Voici votre panier! Vous disposez de ${monPanier.getNbArticles()}
-	articles
+	article(s)
 
 	<table>
 
 		<tr>
 			<th>Titre</th>
+			<th>Choix quantité</th>
 			<th>Quantité</th>
-			<th>PrixHT</th>
 			<th>Prix</th>
-			<th>Prix Total</th>
 
-			<td>${monPanier.getPrixTotal()}&euro;</td>
+
+			<td>Prix total: ${PrixTOT}&euro;</td>
 
 		</tr>
 
@@ -66,14 +66,22 @@
 					</form>
 				</td>
 
-				<td><label for="name">${listePanier}</label> <input
-					type="number" step="1" value="${newQuantite}" min="1" max="50" />
-					<input type="submit" value="Modifier" name="action" /></td>
+				<td><c:if test="${not empty listePanier.article.getMateriel()}">
+						<form action="GestionPanier" method=post>
+							<input type="hidden" name="Reference"
+								value="${listePanier.article.ref}" /> <input type="number"
+								name="quantity" value="${listePanier.quantite}" step="1" min="${listePanier.quantite}"
+								max="${listePanier.article.getMateriel().stock}"> <input type="submit" value="Modifier"
+								name="action">
+						</form>
+
+					</c:if></td>
 
 
+				<td>${listePanier.quantite}</td>
 				<td>${listePanier.article.prixHT}&euro;</td>
 
-				<td>${PrixTOT}</td>
+
 
 			</tr>
 
@@ -85,3 +93,8 @@
 
 </body>
 </html>
+
+<!-- 
+
+
+	 -->

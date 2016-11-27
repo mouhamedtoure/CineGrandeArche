@@ -101,7 +101,7 @@ public class Panier {
 
 	}
 
-	public int modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
+	public void modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
 
 		if (quantite < 0) {
 			IllegalArgumentException qe = new IllegalArgumentException("Quantite saisie non autorisee");
@@ -111,11 +111,12 @@ public class Panier {
 
 		LignePanier lpArticleRecherche = new LignePanier(a, quantite);
 		if (this.lignesPanier.contains(lpArticleRecherche)) {
-			int i = this.lignesPanier.indexOf(lpArticleRecherche);
-			this.lignesPanier.get(i).setQuantite(quantite);
+			int index = this.lignesPanier.indexOf(lpArticleRecherche);
+
+			this.lignesPanier.get(index).setQuantite(quantite);
 
 		}
-		return quantite;
+	
 
 	}
 
@@ -152,7 +153,7 @@ public class Panier {
 
 		for (LignePanier lp : this.lignesPanier) {
 
-			prixTotal += lp.article.getPrixHT()* ((double)lp.quantite);
+			prixTotal += (double) ((lp.article.getPrixHT()* (lp.quantite))*100)/100;
 		}
 
 		return prixTotal;

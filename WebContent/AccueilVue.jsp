@@ -38,7 +38,7 @@
 	</div>
 
 
-	<table >
+	<table>
 
 		<tr>
 
@@ -60,10 +60,11 @@
 
 				<td><c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if>
 					<form action="GestionArticle" method="post">
+
 						<input type="hidden" name="Reference" value="${article.ref}" /> <input
-							type="submit" value="Ajouter" name="action" /> <span
-							class="erreurs0">${erreurs0[article.ref]}</span>
-					</form></td>
+							type="submit" value="Ajouter" name="action" />
+					</form>
+				<td><span class="erreurs0">${erreurs0[article.ref]}</span></td>
 			</tr>
 
 

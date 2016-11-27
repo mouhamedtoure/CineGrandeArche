@@ -1,8 +1,10 @@
 package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -46,9 +48,11 @@ public class GestionPanier extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 
 		Panier panier = (Panier) session.getAttribute("monPanier");
@@ -57,13 +61,12 @@ public class GestionPanier extends HttpServlet {
 
 		String action = request.getParameter("action");
 		Map<String, String> erreurs0 = new HashMap<String, String>();
+		int quantite = Integer.parseInt(request.getParameter("quantity"));
+
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Article> articlesP = (ArrayList<Article>) session.getAttribute("mesArticles");
-		int newQuantite = 0;
-
 		if (action != null && action.equals("Modifier")) {
-
 			// le panier existe peut-être déjà , utiliser une session
 
 			for (Article a : articlesP) {
@@ -73,9 +76,8 @@ public class GestionPanier extends HttpServlet {
 					int index = articlesP.indexOf(a);
 
 					try {
-						
-						
-						panier.modifierQuantite(articlesP.get(index), newQuantite);
+
+						panier.modifierQuantite(articlesP.get(index), quantite);
 
 
 					} catch (IllegalArgumentException e1) {
@@ -84,16 +86,17 @@ public class GestionPanier extends HttpServlet {
 
 					}
 					break;
+
 				}
 
 			}
+
 		}
-		
+
+
 		request.setAttribute("erreurs0", erreurs0);
-		session.setAttribute("newQuantite", newQuantite);
 		session.setAttribute("compteurPanier", panier.getCompteur());
 		session.setAttribute("PrixTOT", panier.getPrixTotal());
-
 		RequestDispatcher rd = request.getRequestDispatcher("/PanierVue.jsp");
 		rd.forward(request, response);
 	}
