@@ -2,7 +2,7 @@ package fr.demos.poe.projet.librairie.metier;
 
 public abstract class Article {
 
-	private String ref;
+	private String reference;
 	private double prixHT;
 	private String nom;
 	private String description;
@@ -15,7 +15,7 @@ public abstract class Article {
 
 	public Article(String ref, double prixHT, String nom, String image, String format, String url) {
 		super();
-		this.ref = ref;
+		this.reference = ref;
 		this.prixHT = prixHT;
 		this.nom = nom;
 		this.demat = new Dematerialise(format, url);
@@ -29,7 +29,7 @@ public abstract class Article {
 	public Article(String ref, double prixHT, String nom, String image, Etat etat, Integer stock) {
 
 		super();
-		this.ref = ref;
+		this.reference = ref;
 		this.prixHT = prixHT;
 		this.nom = nom;
 		this.materiel = new Materialise(stock);
@@ -42,7 +42,7 @@ public abstract class Article {
 	public Article(String ref, double prixHT, String nom, String image, Integer stock) {
 
 		super();
-		this.ref = ref;
+		this.reference = ref;
 		this.prixHT = prixHT;
 		this.nom = nom;
 		this.materiel = new Materialise(stock);
@@ -51,11 +51,11 @@ public abstract class Article {
 	}
 
 	public String getRef() {
-		return ref;
+		return reference;
 	}
 
 	public void setRef(String ref) {
-		this.ref = ref;
+		this.reference = ref;
 	}
 
 	public double getPrixHT() {
@@ -107,7 +107,7 @@ public abstract class Article {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
+		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
 		return result;
 	}
 
@@ -120,10 +120,10 @@ public abstract class Article {
 		if (getClass() != obj.getClass())
 			return false;
 		Article other = (Article) obj;
-		if (ref == null) {
-			if (other.ref != null)
+		if (reference == null) {
+			if (other.reference != null)
 				return false;
-		} else if (!ref.equals(other.ref))
+		} else if (!reference.equals(other.reference))
 			return false;
 		return true;
 	}

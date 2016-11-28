@@ -153,7 +153,7 @@ public class Panier {
 
 		for (LignePanier lp : this.lignesPanier) {
 
-			prixTotal += (double) ((lp.article.getPrixHT()* (lp.quantite))*100)/100;
+			prixTotal += (double) Math.rint(((lp.article.getPrixHT()* (lp.quantite))*100))/100;
 		}
 
 		return prixTotal;

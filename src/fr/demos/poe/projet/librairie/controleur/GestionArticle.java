@@ -76,7 +76,6 @@ public class GestionArticle extends HttpServlet {
 		String reference = request.getParameter("Reference");
 		String action = request.getParameter("action");
 		Map<String, String> erreurs0 = new HashMap<String, String>();
-		int k = 0;
 
 		if (action != null && action.equals("Ajouter")) {
 
@@ -86,25 +85,20 @@ public class GestionArticle extends HttpServlet {
 
 				if (a.getRef().equals(reference)) {
 
-					if (a.getDemat() == null || (a.getDemat() != null && k == 0)) {
+					int index = articlesP.indexOf(a);
 
-						int index = articlesP.indexOf(a);
+					try {
+						panier.ajouterArticle(articlesP.get(index), 1);
 
-						try {
-							panier.ajouterArticle(articlesP.get(index), 1);
-							k=1;
+					} catch (StockException e1) {
 
-						} catch (StockException e1) {
-
-							erreurs0.put(reference, e1.getMessage());
-
-						}
-
-						break;
+						erreurs0.put(reference, e1.getMessage());
 
 					}
-				}
 
+					break;
+
+				}
 			}
 
 		}

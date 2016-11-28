@@ -66,6 +66,7 @@ public class GestionPanier extends HttpServlet {
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Article> articlesP = (ArrayList<Article>) session.getAttribute("mesArticles");
+		
 		if (action != null && action.equals("Modifier")) {
 			// le panier existe peut-être déjà , utiliser une session
 
