@@ -54,7 +54,6 @@ public class GestionArticle extends HttpServlet {
 //		mesArticles.add(l2);
 //		mesArticles.add(l3);
 //		mesArticles.add(ad1);
-
 		
 		try {
 			

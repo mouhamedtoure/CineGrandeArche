@@ -6,17 +6,21 @@ public class ArticleDivers extends Article {
 	private String type;
 	private String caracteristique;
 
-	public ArticleDivers(String ref, double prixHT, String nom, String image, Etat etat, Integer stock, String type, String caracteristique) {
-		super(ref, prixHT, nom, image, etat, stock);
+	
+	// Constructeur d'un article divers materialise 
+	
+	public ArticleDivers(String ref, double prixHT, String nom, String description, String image, Etat etat, int stock, double delaiLivraison, String type, String caracteristique) {
+		super(ref, prixHT, nom, description, image, etat, stock, delaiLivraison);
 		
 		this.type=type;
 		this.caracteristique=caracteristique;
 	
 	}
 	
-
-	public ArticleDivers(String ref, double prixHT, String nom, String image, String format, String url, String type, String caracteristique) {
-		super(ref, prixHT, nom, image, format, url);
+	// Constructeur d'un article divers dematerialise
+	
+	public ArticleDivers(String ref, double prixHT, String nom, String description, String image, String format, String url, String type, String caracteristique) {
+		super(ref, prixHT, nom, description, image, format, url);
 		this.type=type;
 		this.caracteristique=caracteristique;
 	

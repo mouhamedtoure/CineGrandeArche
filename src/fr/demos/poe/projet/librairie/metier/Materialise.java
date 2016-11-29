@@ -3,31 +3,23 @@ package fr.demos.poe.projet.librairie.metier;
 public class Materialise {
 
 	private Integer stock;
-	private double delai;
+	private double delaiLivraison;
 	
 	public Materialise(Integer stock, double delaiLivraison) {
 		// TODO Auto-generated constructor stub
 	
 		this.stock=stock;
-		this.delai=delaiLivraison;
+		this.delaiLivraison=delaiLivraison;
 		
 	}
 
 
-
-
-
-	public Materialise(Integer stock) {
-		super();
-		this.stock = stock;
+	public double getDelaiLivraison() {
+		return delaiLivraison;
 	}
 
-	public double getDelai() {
-		return delai;
-	}
-
-	public void setDelai(double delai) {
-		this.delai = delai;
+	public void setDelaiLivraison(double delai) {
+		this.delaiLivraison = delai;
 	}
 
 

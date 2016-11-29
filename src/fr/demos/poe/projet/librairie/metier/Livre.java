@@ -13,11 +13,11 @@ public class Livre extends Article {
 
 	// Constructeur d'un livre materialise 
 
-	public Livre(String ref, double prixHT, String nom, String image, Etat etat, Integer stock, String isbn, String format, LocalDate dateParution, String auteur, String editeur, String genre) {
-		super(ref, prixHT, nom, image, etat, stock);
+	public Livre(String ref, double prixHT, String nom, String image, String description, Etat etat, double delaiLivraison, String isbn, String format, LocalDate dateParution, String auteur, String editeur, String genre) {
+		super(ref, prixHT, nom, image, description, etat, delaiLivraison);
 		
 		this.isbn = isbn;
-		this.format = isbn;
+		this.format = format;
 		this.dateParution= dateParution;
 		this.auteur = auteur;
 		this.editeur = editeur;
@@ -27,10 +27,14 @@ public class Livre extends Article {
 
 	// Constructeur d'un livre dematerialise
 
-	public Livre(String ref, double prixHT, String nom, String image, String format, String url, String auteur, String editeur) {
-		super(ref, prixHT, nom, image, format, url);
+	public Livre(String ref, double prixHT, String nom, String image, String format, String url, String isbn, LocalDate dateParution,  String auteur, String editeur, String genre) {
+		super(ref, prixHT, nom, image, format, url, genre);
+		
+		this.isbn=isbn;
+		this.dateParution=dateParution;
 		this.auteur = auteur;
 		this.editeur = editeur;
+		this.genre=genre;
 	}
 
 	public String getIsbn() {

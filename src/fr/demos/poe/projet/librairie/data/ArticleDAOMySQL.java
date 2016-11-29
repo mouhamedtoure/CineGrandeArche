@@ -59,17 +59,15 @@ public class ArticleDAOMySQL implements ArticleDAO {
 		
 
 		while(rs.next()){
-			
-		
-			
+	
 			String ref = rs.getString("reference");
 			Double prixHT = rs.getDouble("prixHT");
 			String nom = rs.getString("nom");
+			String description= rs.getString("description");
 			String image = rs.getString("image");
 			Etat etat=Etat.valueOf(rs.getString("etat"));
 			int stock=rs.getInt("stock");
 			String isbn= rs.getString("isbn");
-
 			String format= rs.getString("format");
 			LocalDate dateParution= rs.getDate("dateParution").toLocalDate();
 			String auteur= rs.getString("auteur");
@@ -78,7 +76,7 @@ public class ArticleDAOMySQL implements ArticleDAO {
 
 		
 		
-			Livre livre = new Livre(ref, prixHT, nom, image, etat, stock, isbn, format, dateParution, auteur, editeur, genre);
+			Livre livre = new Livre(ref, prixHT, nom, description , image, etat, stock, isbn, format, dateParution, auteur, editeur, genre);
 			
 			mesArticles.add(livre);	
 			
