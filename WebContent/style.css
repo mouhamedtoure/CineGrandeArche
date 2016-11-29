@@ -19,11 +19,13 @@ html, body {
 }
 
 #identification {
-	display: left;
+	text-align: center;
+	margin: 0 auto;
+	padding: 0px;
 }
 
 form {
-   display: inline-block;
+	display: inline-block;
 }
 
 #Panier {
@@ -38,31 +40,28 @@ form .erreur {
 	padding: 0px;
 }
 
-
-
 .erreurs0 {
 	color: #900;
 }
 
+#Accueil {
+	display: left;
+}
+
 #rechercheArticle {
-	text-align: center;
-	margin: 0 auto;
-	padding: 0px;
+display: left;
 }
 
 table {
 	text-align: center;
-	border: 3px
-	width: 50%;
+	border: 3px width: 50%;
 }
 
 td {
 	text-align: center;
 	border-width: 3px;
-
 }
 
 td {
 	border-width: 3px;
-
 }

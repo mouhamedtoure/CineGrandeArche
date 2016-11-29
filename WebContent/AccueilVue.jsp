@@ -11,8 +11,10 @@
 </head>
 <body>
 	<div class="header">
-
-
+		
+		<a id="Accueil" href="AccueilVue.jsp"> <strong>Cine
+				Grande Arche    </strong></a>
+		
 		<form id="identification" action="GestionArticle" method="POST">
 			<label for="email">Adresse email</label> <input type="text"
 				value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
@@ -25,19 +27,19 @@
 		</form>
 
 
-		<form id="rechercheArticle" action="" method="POST">
+		
+
+		<a id="Panier" href="PanierVue.jsp"> Panier (${compteurPanier})</a>
+
+	</div>
+
+<form id="rechercheArticle" action="" method="POST">
 
 			<label for="rechercher"></label> <input type="text"
 				value="${Rechercher}" name="rechercher" /> <span class="rechercher"></span>
 			<input type="submit" value="Rechercher" name="action" />
 
 		</form>
-
-		<a id="Panier" href="PanierVue.jsp"> Panier (${compteurPanier})</a>
-
-	</div>
-
-
 	<table>
 
 		<tr>

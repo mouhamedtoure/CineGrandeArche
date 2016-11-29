@@ -5,19 +5,23 @@ import java.time.LocalDate;
 public class Livre extends Article {
 
 	private String isbn;
-	private String titre;
 	private String format;
-	private String auteur;
 	private LocalDate dateParution;
+	private String auteur;
 	private String editeur;
 	private String genre;
 
 	// Constructeur d'un livre materialise 
 
-	public Livre(String ref, double prixHT, String nom, String image, Etat etat, Integer stock, String auteur, String editeur) {
+	public Livre(String ref, double prixHT, String nom, String image, Etat etat, Integer stock, String isbn, String format, LocalDate dateParution, String auteur, String editeur, String genre) {
 		super(ref, prixHT, nom, image, etat, stock);
+		
+		this.isbn = isbn;
+		this.format = isbn;
+		this.dateParution= dateParution;
 		this.auteur = auteur;
 		this.editeur = editeur;
+		this.genre = genre;
 	}
 
 
@@ -104,12 +108,5 @@ public class Livre extends Article {
 
 	}
 
-	public String getTitre() {
-		return titre;
-	}
-
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
 
 }

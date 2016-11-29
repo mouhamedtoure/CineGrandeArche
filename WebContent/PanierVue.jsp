@@ -10,6 +10,9 @@
 </head>
 <body>
 	<div class="header">
+		<a id="Accueil" href="AccueilVue.jsp"> <strong>Cine
+				Grande Arche </strong></a>
+
 
 
 		<form id="identification" action="GestionArticle" method="POST">
@@ -70,9 +73,10 @@
 						<form action="GestionPanier" method=post>
 							<input type="hidden" name="Reference"
 								value="${listePanier.article.ref}" /> <input type="number"
-								name="quantity" value="${listePanier.quantite}" step="1" min="${listePanier.quantite}"
-								max="${listePanier.article.getMateriel().stock}"> <input type="submit" value="Modifier"
-								name="action">
+								name="quantity" value="${listePanier.quantite}" step="1"
+								min="${listePanier.quantite}"
+								max="${listePanier.article.getMateriel().stock}"> <input
+								type="submit" value="Modifier" name="action">
 						</form>
 
 					</c:if></td>
@@ -80,9 +84,17 @@
 
 				<td>${listePanier.quantite}</td>
 				<td>${listePanier.article.prixHT}&euro;</td>
+				<td>
+					
+				
+					<form id="supprimerArticle" action="" method="POST">
 
+						 <input type="submit" value="Supprimer"
+							name="action" />
 
+					</form>
 
+				</td>
 			</tr>
 
 		</c:forEach>
