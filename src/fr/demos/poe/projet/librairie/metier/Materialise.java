@@ -44,7 +44,7 @@ public class Materialise {
 
 	@Override
 	public String toString() {
-		return "Materialise [stock=" + stock + ", delai=" + delai + "]";
+		return "Materialise [stock=" + stock + ", delai=" + delaiLivraison + "]";
 	}
 
 

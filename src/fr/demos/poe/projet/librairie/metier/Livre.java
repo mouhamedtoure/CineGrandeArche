@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class Livre extends Article {
 
 	private String isbn;
-	private String format;
 	private LocalDate dateParution;
 	private String auteur;
 	private String editeur;
@@ -13,11 +12,10 @@ public class Livre extends Article {
 
 	// Constructeur d'un livre materialise 
 
-	public Livre(String ref, double prixHT, String nom, String image, String description, Etat etat, double delaiLivraison, String isbn, String format, LocalDate dateParution, String auteur, String editeur, String genre) {
-		super(ref, prixHT, nom, image, description, etat, delaiLivraison);
+	public Livre(String ref, double prixHT, String nom, String description, String image, Etat etat, int stock, double delaiLivraison, String isbn, LocalDate dateParution, String auteur, String editeur, String genre) {
+		super(ref, prixHT, nom, description, image , etat, stock, delaiLivraison);
 		
 		this.isbn = isbn;
-		this.format = format;
 		this.dateParution= dateParution;
 		this.auteur = auteur;
 		this.editeur = editeur;
@@ -27,10 +25,9 @@ public class Livre extends Article {
 
 	// Constructeur d'un livre dematerialise
 
-	public Livre(String ref, double prixHT, String nom, String image, String format, String url, String isbn, LocalDate dateParution,  String auteur, String editeur, String genre) {
-		super(ref, prixHT, nom, image, format, url, genre);
+	public Livre(String ref, double prixHT, String nom, String description, String image, String format, String url, LocalDate dateParution,  String auteur, String editeur, String genre) {
+		super(ref, prixHT, nom, description, image, format, url);
 		
-		this.isbn=isbn;
 		this.dateParution=dateParution;
 		this.auteur = auteur;
 		this.editeur = editeur;
@@ -45,13 +42,6 @@ public class Livre extends Article {
 		this.isbn = isbn;
 	}
 
-	public String getFormat() {
-		return format;
-	}
-
-	public void setFormat(String format) {
-		this.format = format;
-	}
 
 	public LocalDate getDateParution() {
 		return dateParution;

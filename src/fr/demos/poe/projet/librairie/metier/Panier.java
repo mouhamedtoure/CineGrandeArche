@@ -22,6 +22,8 @@ public class Panier {
 
 		// Initialisation d'un nouveau panier avec les paramètres en argument
 		LignePanier lp = new LignePanier(a, quantite);
+		
+		int stockRestant =   a.getMateriel().getStock();
 
 		// l'article était déjà dans le panier
 		if (this.lignesPanier.contains(lp)) {
@@ -36,13 +38,13 @@ public class Panier {
 
 				// On teste pour voir si le stock est superieur a la quantite
 
-				if ((a.getMateriel().getStock()) >= quantite) {
+				if (stockRestant >= quantite) {
 
 					// On augmente la quantite dans le panier
 					lignesPanier.get(index).quantite += quantite;
 
 					// Diminution du stock
-					a.getMateriel().setStock(a.getMateriel().getStock() - quantite);
+					stockRestant= a.getMateriel().getStock() - quantite;
 
 				}
 
@@ -73,7 +75,7 @@ public class Panier {
 
 				// Si le stock dispo est inferieur a la quantite
 
-				if (a.getMateriel().getStock() < quantite) {
+				if (stockRestant < quantite) {
 
 					StockException se = new StockException(a, a.getMateriel().getStock(),
 							"La quantite demandee est superieure au stock disponible");
@@ -87,7 +89,9 @@ public class Panier {
 				else {
 
 					this.lignesPanier.add(lp);
-					a.getMateriel().setStock(a.getMateriel().getStock() - quantite);
+					
+					 stockRestant= a.getMateriel().getStock() - quantite;
+
 
 				}
 
@@ -119,6 +123,8 @@ public class Panier {
 	
 
 	}
+	
+
 
 	public void vider() {
 

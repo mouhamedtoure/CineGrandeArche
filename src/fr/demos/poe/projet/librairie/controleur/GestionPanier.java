@@ -93,6 +93,8 @@ public class GestionPanier extends HttpServlet {
 			}
 
 		}
+		
+		
 
 
 		request.setAttribute("erreurs0", erreurs0);

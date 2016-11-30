@@ -136,6 +136,14 @@ public abstract class Article {
 		this.materiel = materiel;
 	}
 
+	public String getReference() {
+		return reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
 	
 	
 	

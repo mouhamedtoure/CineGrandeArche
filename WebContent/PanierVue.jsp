@@ -85,12 +85,12 @@
 				<td>${listePanier.quantite}</td>
 				<td>${listePanier.article.prixHT}&euro;</td>
 				<td>
-					
-				
-					<form id="supprimerArticle" action="" method="POST">
 
-						 <input type="submit" value="Supprimer"
-							name="action" />
+
+					<form id="supprimerArticle" action="" method="POST">
+						<input type="hidden" name="Reference"
+							value="${listePanier.article.ref}" /> <input type="submit"
+							value="Supprimer" name="action" />
 
 					</form>
 
