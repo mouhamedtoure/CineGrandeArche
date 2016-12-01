@@ -68,23 +68,13 @@ public class ArticleDAOMySQL implements ArticleDAO {
 
 				String ref = rs.getString("reference");
 
-				System.out.println("ref:" + ref);
-
 				Double prixHT = rs.getDouble("prixHT");
-
-				System.out.println("prixHT:" + prixHT);
 
 				String nom = rs.getString("nom");
 
-				System.out.println("nom:" + nom);
-
 				String description = rs.getString("description");
 
-				System.out.println("description:" + description);
-
 				String image = rs.getString("image");
-
-				System.out.println("image:" + image);
 
 				LocalDate dateParution = rs.getDate("dateParution").toLocalDate();
 				String auteur = rs.getString("auteur");
@@ -132,15 +122,15 @@ public class ArticleDAOMySQL implements ArticleDAO {
 
 				String image = rs2.getString("image");
 
-				String format = rs2.getString("format");
-
 				// Si l'article n'est pas un livre: article divers
 
 				String caracteristique = rs2.getString("caracteristique");
 
 				// article divers dematerialise
 
-				if (rs2.getString("etat") == null) {
+				if (rs2.getString("format") == null) {
+
+					String format = rs2.getString("format");
 
 					String url = rs2.getString("url");
 

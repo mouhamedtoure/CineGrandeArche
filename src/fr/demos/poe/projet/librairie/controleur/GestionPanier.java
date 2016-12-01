@@ -54,6 +54,7 @@ public class GestionPanier extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
+		int quantite = 0;
 
 		Panier panier = (Panier) session.getAttribute("monPanier");
 
@@ -61,12 +62,15 @@ public class GestionPanier extends HttpServlet {
 
 		String action = request.getParameter("action");
 		Map<String, String> erreurs0 = new HashMap<String, String>();
-		int quantite = Integer.parseInt(request.getParameter("quantity"));
 
+		if (request.getParameter("quantity") != null) {
 
+			quantite = Integer.parseInt(request.getParameter("quantity"));
+
+		}
 		@SuppressWarnings("unchecked")
 		ArrayList<Article> articlesP = (ArrayList<Article>) session.getAttribute("mesArticles");
-		
+
 		if (action != null && action.equals("Modifier")) {
 			// le panier existe peut-être déjà , utiliser une session
 
@@ -80,7 +84,6 @@ public class GestionPanier extends HttpServlet {
 
 						panier.modifierQuantite(articlesP.get(index), quantite);
 
-
 					} catch (IllegalArgumentException e1) {
 
 						erreurs0.put(reference, e1.getMessage());
@@ -93,9 +96,27 @@ public class GestionPanier extends HttpServlet {
 			}
 
 		}
-		
-		
 
+		if (action != null && action.equals("Supprimer")) {
+			// le panier existe peut-être déjà , utiliser une session
+			
+			
+
+			for (Article a : articlesP) {
+
+				if (a.getRef().equals(reference)) {
+
+					int index = articlesP.indexOf(a);
+
+					panier.supprimerArticle(articlesP.get(index));
+
+					break;
+
+				}
+
+			}
+
+		}
 
 		request.setAttribute("erreurs0", erreurs0);
 		session.setAttribute("compteurPanier", panier.getCompteur());

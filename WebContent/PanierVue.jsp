@@ -59,37 +59,37 @@
 
 
 
-		<c:forEach items="${monPanier.getListeAchat()}" var="listePanier">
+		<c:forEach items="${monPanier.getListeAchat()}" var="lignePanier">
 			<tr>
-				<td>${listePanier.article.nom}
+				<td>${lignePanier.article.nom}
 					<form action="GestionPanier" method="post">
 						<input type="hidden" name="ModifierArticle"
-							value="${listePanier.article.ref}">
+							value="${lignePanier.article.ref}">
 
 					</form>
 				</td>
 
-				<td><c:if test="${not empty listePanier.article.getMateriel()}">
+				<td><c:if test="${not empty lignePanier.article.getMateriel()}">
 						<form action="GestionPanier" method=post>
 							<input type="hidden" name="Reference"
-								value="${listePanier.article.ref}" /> <input type="number"
-								name="quantity" value="${listePanier.quantite}" step="1"
-								min="${listePanier.quantite}"
-								max="${listePanier.article.getMateriel().stock}"> <input
+								value="${lignePanier.article.ref}" /> <input type="number"
+								name="quantity" value="${lignePanier.quantite}" step="1"
+								min="${lignePanier.quantite}"
+								max="${lignePanier.article.getMateriel().stock}"> <input
 								type="submit" value="Modifier" name="action">
 						</form>
 
 					</c:if></td>
 
 
-				<td>${listePanier.quantite}</td>
-				<td>${listePanier.article.prixHT}&euro;</td>
+				<td>${lignePanier.quantite}</td>
+				<td>${lignePanier.article.prixHT}&euro;</td>
 				<td>
 
 
-					<form id="supprimerArticle" action="" method="POST">
+					<form id="supprimerArticle" action="GestionPanier" method="POST">
 						<input type="hidden" name="Reference"
-							value="${listePanier.article.ref}" /> <input type="submit"
+							value="${lignePanier.article.ref}" /> <input type="submit"
 							value="Supprimer" name="action" />
 
 					</form>

@@ -15,15 +15,13 @@ public class Panier {
 	public Panier(Compte compte) {
 
 		this.compte = compte;
-	
+
 	}
 
 	public void ajouterArticle(Article a, int quantite) throws StockException {
 
 		// Initialisation d'un nouveau panier avec les paramètres en argument
 		LignePanier lp = new LignePanier(a, quantite);
-		
-		int stockRestant =   a.getMateriel().getStock();
 
 		// l'article était déjà dans le panier
 		if (this.lignesPanier.contains(lp)) {
@@ -38,13 +36,11 @@ public class Panier {
 
 				// On teste pour voir si le stock est superieur a la quantite
 
-				if (stockRestant >= quantite) {
+				if (a.getMateriel().getStock() >= quantite) {
 
 					// On augmente la quantite dans le panier
 					lignesPanier.get(index).quantite += quantite;
-
-					// Diminution du stock
-					stockRestant= a.getMateriel().getStock() - quantite;
+					this.lignesPanier.add(lp);
 
 				}
 
@@ -61,7 +57,7 @@ public class Panier {
 			else {
 
 				// On augmente la quantite
-				lignesPanier.get(index).quantite += quantite;
+				this.lignesPanier.add(lp);
 				// Pas de diminution de stock ici
 			}
 
@@ -75,7 +71,7 @@ public class Panier {
 
 				// Si le stock dispo est inferieur a la quantite
 
-				if (stockRestant < quantite) {
+				if (a.getMateriel().getStock() < quantite) {
 
 					StockException se = new StockException(a, a.getMateriel().getStock(),
 							"La quantite demandee est superieure au stock disponible");
@@ -89,9 +85,6 @@ public class Panier {
 				else {
 
 					this.lignesPanier.add(lp);
-					
-					 stockRestant= a.getMateriel().getStock() - quantite;
-
 
 				}
 
@@ -103,6 +96,19 @@ public class Panier {
 			}
 		}
 
+	}
+
+	public void supprimerArticle(Article a) {
+
+		for (LignePanier lp : this.lignesPanier) {
+
+			if (lp.article.equals(a)) {
+
+				this.lignesPanier.remove(lp);
+
+			}
+
+		}
 	}
 
 	public void modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
@@ -120,11 +126,8 @@ public class Panier {
 			this.lignesPanier.get(index).setQuantite(quantite);
 
 		}
-	
 
 	}
-	
-
 
 	public void vider() {
 
@@ -150,7 +153,7 @@ public class Panier {
 	public String toString() {
 
 		return lignesPanier + "\n";
-		
+
 	}
 
 	public double getPrixTotal() {
@@ -159,7 +162,7 @@ public class Panier {
 
 		for (LignePanier lp : this.lignesPanier) {
 
-			prixTotal += Math.rint((((lp.article.getPrixHT()* (lp.quantite))*100))/100);
+			prixTotal += Math.rint((((lp.article.getPrixHT() * (lp.quantite)) * 100)) / 100);
 		}
 
 		return prixTotal;
@@ -175,13 +178,14 @@ public class Panier {
 
 		return compteur;
 	}
-	public int getNbArticles(){
-		int nbArticles=0;
+
+	public int getNbArticles() {
+		int nbArticles = 0;
 		for (Iterator<LignePanier> iterator = this.lignesPanier.iterator(); iterator.hasNext();) {
 			iterator.next();
 			nbArticles++;
 		}
 		return nbArticles;
-			
+
 	}
 }
