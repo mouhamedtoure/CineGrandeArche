@@ -43,64 +43,72 @@
 
 	Voici votre panier! Vous disposez de ${monPanier.getNbArticles()}
 	article(s)
+	
+	
 
-	<table>
-
-		<tr>
-			<th>Titre</th>
-			<th>Choix quantité</th>
-			<th>Quantité</th>
-			<th>Prix</th>
-
-
-			<td>Prix total: ${PrixTOT}&euro;</td>
-
-		</tr>
+<c:if test="${monPanier.getNbArticles()!=0}">
+	
+		<table>
 
 
 
-		<c:forEach items="${monPanier.getListeAchat()}" var="lignePanier">
 			<tr>
-				<td>${lignePanier.article.nom}
-					<form action="GestionPanier" method="post">
-						<input type="hidden" name="ModifierArticle"
-							value="${lignePanier.article.ref}">
-
-					</form>
-				</td>
-
-				<td><c:if test="${not empty lignePanier.article.getMateriel()}">
-						<form action="GestionPanier" method=post>
-							<input type="hidden" name="Reference"
-								value="${lignePanier.article.ref}" /> <input type="number"
-								name="quantity" value="${lignePanier.quantite}" step="1"
-								min="${lignePanier.quantite}"
-								max="${lignePanier.article.getMateriel().stock}"> <input
-								type="submit" value="Modifier" name="action">
-						</form>
-
-					</c:if></td>
+				<th>Titre</th>
+				<th>Choix quantité</th>
+				<th>Quantité</th>
+				<th>Prix</th>
+				<th>Suppression</th>
 
 
-				<td>${lignePanier.quantite}</td>
-				<td>${lignePanier.article.prixHT}&euro;</td>
-				<td>
+				<td>Prix total: ${monPanier.getPrixTotal()}&euro;</td>
 
-
-					<form id="supprimerArticle" action="GestionPanier" method="POST">
-						<input type="hidden" name="Reference"
-							value="${lignePanier.article.ref}" /> <input type="submit"
-							value="Supprimer" name="action" />
-
-					</form>
-
-				</td>
 			</tr>
 
-		</c:forEach>
 
-	</table>
 
+			<c:forEach items="${monPanier.getListeAchat()}" var="lignePanier">
+				<tr>
+					<td>${lignePanier.article.nom}
+						<form action="GestionPanier" method="post">
+							<input type="hidden" name="ModifierArticle"
+								value="${lignePanier.article.ref}">
+
+						</form>
+					</td>
+
+					<td><c:if
+							test="${not empty lignePanier.article.getMateriel()}">
+							<form action="GestionPanier" method=post>
+								<input type="hidden" name="Reference"
+									value="${lignePanier.article.ref}" /> <input type="number"
+									name="quantity" value="${lignePanier.quantite}" step="1"
+									min="${lignePanier.quantite}"
+									max="${lignePanier.article.getMateriel().stock}"> <input
+									type="submit" value="Modifier" name="action">
+							</form>
+
+						</c:if></td>
+
+
+					<td>${lignePanier.quantite}</td>
+					<td>${lignePanier.article.prixHT}&euro;</td>
+					<td>
+
+
+						<form id="supprimerArticle" action="GestionPanier" method="POST">
+							<input type="hidden" name="Reference"
+								value="${lignePanier.article.ref}" /> <input type="submit"
+								value="Supprimer" name="action" />
+
+						</form>
+
+					</td>
+				</tr>
+
+			</c:forEach>
+
+		</table>
+	</c:if>
 
 
 </body>

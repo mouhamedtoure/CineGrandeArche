@@ -40,7 +40,6 @@ public class Panier {
 
 					// On augmente la quantite dans le panier
 					lignesPanier.get(index).quantite += quantite;
-					this.lignesPanier.add(lp);
 
 				}
 
@@ -57,8 +56,7 @@ public class Panier {
 			else {
 
 				// On augmente la quantite
-				this.lignesPanier.add(lp);
-				// Pas de diminution de stock ici
+				lignesPanier.get(index).quantite += quantite;
 			}
 
 		}
@@ -99,16 +97,20 @@ public class Panier {
 	}
 
 	public void supprimerArticle(Article a) {
+		
+		int quantite = 0;
+		LignePanier lp = new LignePanier(a, quantite);
+	
 
-		for (LignePanier lp : this.lignesPanier) {
+		
 
-			if (lp.article.equals(a)) {
+			if (this.lignesPanier.contains(lp)) {
 
 				this.lignesPanier.remove(lp);
 
 			}
 
-		}
+		
 	}
 
 	public void modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
