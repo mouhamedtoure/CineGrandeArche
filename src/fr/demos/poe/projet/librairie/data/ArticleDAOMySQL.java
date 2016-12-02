@@ -51,110 +51,182 @@ public class ArticleDAOMySQL implements ArticleDAO {
 		try {
 			Connection cx = dataSource.getConnection();
 
-			// Prepared statement pour les donnees dans la table livre
-			PreparedStatement contexteRequete = cx
-					.prepareStatement("SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference)");
-			ResultSet rs = contexteRequete.executeQuery();
+			if (critere == null) {
 
-			// Prepared statement pour les donnees dans la table article divers
-			PreparedStatement contexteRequete2 = cx.prepareStatement(
-					"SELECT * FROM articledivers d INNER JOIN Article a ON (d.reference=a.reference)");
-			ResultSet rs2 = contexteRequete2.executeQuery();
+				// Prepared statement pour les donnees dans la table livre
+				PreparedStatement contexteRequete = cx
+						.prepareStatement("SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference)");
 
-			while (rs.next()) {
+				ResultSet rs = contexteRequete.executeQuery();
 
-				// On récupère dans les bases les attributs communs à tous les
-				// livres
+				// Prepared statement pour les donnees dans la table article
+				// divers
+				PreparedStatement contexteRequete2 = cx.prepareStatement(
+						"SELECT * FROM articledivers d INNER JOIN Article a ON (d.reference=a.reference)");
+				ResultSet rs2 = contexteRequete2.executeQuery();
 
-				String ref = rs.getString("reference");
+				while (rs.next()) {
 
-				Double prixHT = rs.getDouble("prixHT");
+					// On récupère dans les bases les attributs communs à tous
+					// les
+					// livres
 
-				String nom = rs.getString("nom");
+					String ref = rs.getString("reference");
 
-				String description = rs.getString("description");
+					Double prixHT = rs.getDouble("prixHT");
 
-				String image = rs.getString("image");
+					String nom = rs.getString("nom");
 
-				LocalDate dateParution = rs.getDate("dateParution").toLocalDate();
-				String auteur = rs.getString("auteur");
-				String editeur = rs.getString("editeur");
-				String genre = rs.getString("genre");
+					String description = rs.getString("description");
 
-				// Si l'article est un livre materialise
-				if (rs.getString("format") == null) {
+					String image = rs.getString("image");
 
-					String isbn = rs.getString("isbn");
+					LocalDate dateParution = rs.getDate("dateParution").toLocalDate();
+					String auteur = rs.getString("auteur");
+					String editeur = rs.getString("editeur");
+					String genre = rs.getString("genre");
 
-					Etat etat = Etat.valueOf(rs.getString("etat"));
-					int stock = rs.getInt("stock");
-					double delaiLivraison = rs.getDouble("delaiLivraison");
+					// Si l'article est un livre materialise
+					if (rs.getString("format") == null) {
 
-					Livre livre = new Livre(ref, prixHT, nom, description, image, etat, stock, delaiLivraison, isbn,
-							dateParution, auteur, editeur, genre);
-					mesArticles.add(livre);
+						String isbn = rs.getString("isbn");
+
+						Etat etat = Etat.valueOf(rs.getString("etat"));
+						int stock = rs.getInt("stock");
+						double delaiLivraison = rs.getDouble("delaiLivraison");
+
+						Livre livre = new Livre(ref, prixHT, nom, description, image, etat, stock, delaiLivraison, isbn,
+								dateParution, auteur, editeur, genre);
+						mesArticles.add(livre);
+
+					}
+					// Si le livre est un livre dematerialise
+					else {
+
+						String format = rs.getString("format");
+
+						String url = rs.getString("url");
+
+						Livre livre = new Livre(ref, prixHT, nom, description, image, format, url, dateParution, auteur,
+								editeur, genre);
+						mesArticles.add(livre);
+
+					}
 
 				}
-				// Si le livre est un livre dematerialise
-				else {
 
-					String format = rs.getString("format");
+				while (rs2.next()) {
 
-					String url = rs.getString("url");
+					String ref = rs2.getString("reference");
 
-					Livre livre = new Livre(ref, prixHT, nom, description, image, format, url, dateParution, auteur,
-							editeur, genre);
-					mesArticles.add(livre);
+					Double prixHT = rs2.getDouble("prixHT");
+
+					String nom = rs2.getString("nom");
+
+					String description = rs2.getString("description");
+
+					String image = rs2.getString("image");
+
+					// Si l'article n'est pas un livre: article divers
+
+					String caracteristique = rs2.getString("caracteristique");
+
+					// article divers dematerialise
+
+					if (rs2.getString("format") == null) {
+
+						String format = rs2.getString("format");
+
+						String url = rs2.getString("url");
+
+						ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, format, url,
+								caracteristique);
+						mesArticles.add(divers);
+
+					}
+					// Si l'article divers est materialise
+
+					else {
+						Etat etat = Etat.valueOf(rs2.getString("etat"));
+						int stock = rs2.getInt("stock");
+						double delaiLivraison = rs2.getDouble("delaiLivraison");
+
+						ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, etat, stock,
+								delaiLivraison, caracteristique);
+						mesArticles.add(divers);
+
+					}
 
 				}
+			} else {
+				
+				System.out.println("allo");
 
+				// Prepared statement pour la recherche dans la base de données
+				PreparedStatement contexteRequete3 = cx.prepareStatement(
+						"SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference) WHERE auteur LIKE '%" + critere + "%' ORDER BY auteur");
+				ResultSet rs3 = contexteRequete3.executeQuery();
+				System.out.println("allo2");
+
+				while (rs3.next()) {
+					
+					System.out.println("allo3");
+
+
+					// On récupère dans les bases les attributs communs à tous
+					// les
+					// livres
+
+					String ref = rs3.getString("reference");
+					System.out.println("ref: "+ref);
+					Double prixHT = rs3.getDouble("prixHT");
+
+					String nom = rs3.getString("nom");
+
+					String description = rs3.getString("description");
+
+					String image = rs3.getString("image");
+
+					LocalDate dateParution = rs3.getDate("dateParution").toLocalDate();
+					String auteur = rs3.getString("auteur");
+					String editeur = rs3.getString("editeur");
+					String genre = rs3.getString("genre");
+
+					// Si l'article est un livre materialise
+					if (rs3.getString("format") == null) {
+
+						String isbn = rs3.getString("isbn");
+
+						Etat etat = Etat.valueOf(rs3.getString("etat"));
+						int stock = rs3.getInt("stock");
+						double delaiLivraison = rs3.getDouble("delaiLivraison");
+
+						Livre livre = new Livre(ref, prixHT, nom, description, image, etat, stock, delaiLivraison, isbn,
+								dateParution, auteur, editeur, genre);
+
+						System.out.println(livre);
+						mesArticles.add(livre);
+
+					}
+					// Si le livre est un livre dematerialise
+					else {
+
+						String format = rs3.getString("format");
+
+						String url = rs3.getString("url");
+
+						Livre livre = new Livre(ref, prixHT, nom, description, image, format, url, dateParution, auteur,
+								editeur, genre);
+
+						mesArticles.add(livre);
+
+					}
+
+				}
 			}
+		}
 
-			while (rs2.next()) {
-
-				String ref = rs2.getString("reference");
-
-				Double prixHT = rs2.getDouble("prixHT");
-
-				String nom = rs2.getString("nom");
-
-				String description = rs2.getString("description");
-
-				String image = rs2.getString("image");
-
-				// Si l'article n'est pas un livre: article divers
-
-				String caracteristique = rs2.getString("caracteristique");
-
-				// article divers dematerialise
-
-				if (rs2.getString("format") == null) {
-
-					String format = rs2.getString("format");
-
-					String url = rs2.getString("url");
-
-					ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, format, url,
-							caracteristique);
-					mesArticles.add(divers);
-
-				}
-				// Si l'article divers est materialise
-
-				else {
-					Etat etat = Etat.valueOf(rs2.getString("etat"));
-					int stock = rs2.getInt("stock");
-					double delaiLivraison = rs2.getDouble("delaiLivraison");
-
-					ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, etat, stock,
-							delaiLivraison, caracteristique);
-					mesArticles.add(divers);
-
-				}
-
-			}
-
-		} catch (
+		catch (
 
 		Exception ex) {
 

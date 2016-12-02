@@ -2,8 +2,8 @@ package fr.demos.poe.projet.librairie.metier;
 
 public class LignePanier {
 
-	Article article;
-	int quantite;
+	private Article article;
+	private int quantite;
 
 	public LignePanier(Article article, int quantite) {
 		this.article = article;

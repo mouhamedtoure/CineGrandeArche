@@ -39,7 +39,8 @@ public class Panier {
 				if (a.getMateriel().getStock() >= quantite) {
 
 					// On augmente la quantite dans le panier
-					lignesPanier.get(index).quantite += quantite;
+					int quantiteL = lignesPanier.get(index).getQuantite();
+					lignesPanier.get(index).setQuantite (quantiteL+quantite);
 
 				}
 
@@ -56,7 +57,8 @@ public class Panier {
 			else {
 
 				// On augmente la quantite
-				lignesPanier.get(index).quantite += quantite;
+				int quantiteL = lignesPanier.get(index).getQuantite();
+				lignesPanier.get(index).setQuantite (quantiteL+quantite);
 			}
 
 		}
@@ -164,7 +166,7 @@ public class Panier {
 
 		for (LignePanier lp : this.lignesPanier) {
 
-			prixTotal += Math.rint((((lp.article.getPrixHT() * (lp.quantite)) * 100)) / 100);
+			prixTotal += Math.rint((((lp.getArticle().getPrixHT() * (lp.getQuantite())) * 100)) / 100);
 		}
 
 		return prixTotal;

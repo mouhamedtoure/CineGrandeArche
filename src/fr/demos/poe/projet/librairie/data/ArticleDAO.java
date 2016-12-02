@@ -11,4 +11,5 @@ public interface ArticleDAO {
 	void delete(Article a) throws Exception;
 	List <Article> select(String critere); 
 
+
 }
