@@ -11,10 +11,10 @@
 </head>
 <body>
 	<div class="header">
-		
+
 		<a id="Accueil" href="AccueilVue.jsp"> <strong>Cine
-				Grande Arche    </strong></a>
-		
+				Grande Arche </strong></a>
+
 		<form id="identification" action="GestionArticle" method="POST">
 			<label for="email">Adresse email</label> <input type="text"
 				value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
@@ -27,19 +27,24 @@
 		</form>
 
 
-		
+
 
 		<a id="Panier" href="PanierVue.jsp"> Panier (${compteurPanier})</a>
 
 	</div>
 
-<form id="rechercheArticle" action="GestionRecherche" method="POST">
+	<form id="rechercheArticle" action="GestionRecherche" method="POST">
 
-			<label for="rechercher"></label> <input type="text"
-				value="${Rechercher}" name="rechercher" /> <span class="rechercher"></span>
-			<input type="submit" value="Rechercher" name="action" />
+		<label for="rechercher"></label> <input type="text"
+			value="${Rechercher}" name="rechercher" /> <span class="rechercher"></span>
+		<input type="submit" value="Rechercher" name="action" /> <span
+			class="erreur"> ${erreursR['rechercher']} </span> <br> <input
+			type="radio" name="choix" value="auteur" checked />Auteur <input
+			type="radio" name="choix" value="nom" />Nom de l'article <input
+			type="radio" name="choix" value="editeur" />Editeur <input
+			type="radio" name="choix" value="genre" />Genre
 
-		</form>
+	</form>
 	<table>
 
 		<tr>

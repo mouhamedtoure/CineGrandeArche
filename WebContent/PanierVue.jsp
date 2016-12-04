@@ -56,7 +56,7 @@
 				<th>Titre</th>
 				<th>Choix quantité</th>
 				<th>Quantité</th>
-				<th>Prix</th>
+				<th>Prix à l'unité</th>
 				<th>Suppression</th>
 
 
@@ -82,7 +82,7 @@
 								<input type="hidden" name="Reference"
 									value="${lignePanier.article.ref}" /> <input type="number"
 									name="quantity" value="${lignePanier.quantite}" step="1"
-									min="${lignePanier.quantite}"
+									min="0"
 									max="${lignePanier.article.getMateriel().stock}"> <input
 									type="submit" value="Modifier" name="action">
 							</form>

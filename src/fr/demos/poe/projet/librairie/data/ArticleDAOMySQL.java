@@ -51,6 +51,8 @@ public class ArticleDAOMySQL implements ArticleDAO {
 		try {
 			Connection cx = dataSource.getConnection();
 
+			// S'il n'y a pas de critères de recherche
+
 			if (critere == null) {
 
 				// Prepared statement pour les donnees dans la table livre
@@ -131,9 +133,23 @@ public class ArticleDAOMySQL implements ArticleDAO {
 
 					String caracteristique = rs2.getString("caracteristique");
 
-					// article divers dematerialise
+					// article divers materialise
 
 					if (rs2.getString("format") == null) {
+
+						Etat etat = Etat.valueOf(rs2.getString("etat"));
+						int stock = rs2.getInt("stock");
+
+						double delaiLivraison = rs2.getDouble("delaiLivraison");
+
+						ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, etat, stock,
+								delaiLivraison, caracteristique);
+						mesArticles.add(divers);
+
+					}
+					// Si l'article divers est dematerialise
+
+					else {
 
 						String format = rs2.getString("format");
 
@@ -144,41 +160,41 @@ public class ArticleDAOMySQL implements ArticleDAO {
 						mesArticles.add(divers);
 
 					}
-					// Si l'article divers est materialise
-
-					else {
-						Etat etat = Etat.valueOf(rs2.getString("etat"));
-						int stock = rs2.getInt("stock");
-						double delaiLivraison = rs2.getDouble("delaiLivraison");
-
-						ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, etat, stock,
-								delaiLivraison, caracteristique);
-						mesArticles.add(divers);
-
-					}
 
 				}
-			} else {
-				
-				System.out.println("allo");
+			}
+			// S'il y'a un critère de recherche défini
+			else {
 
 				// Prepared statement pour la recherche dans la base de données
 				PreparedStatement contexteRequete3 = cx.prepareStatement(
-						"SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference) WHERE auteur LIKE '%" + critere + "%' ORDER BY auteur");
+						"SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference) WHERE UPPER(auteur) LIKE UPPER('%"
+								+ critere + "%') ORDER BY auteur");
 				ResultSet rs3 = contexteRequete3.executeQuery();
-				System.out.println("allo2");
+
+				// Prepared statement pour recherche selon le gnere
+				PreparedStatement contexteRequete5 = cx.prepareStatement(
+						"SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference) WHERE UPPER(genre) LIKE UPPER('%"
+								+ critere + "%') ORDER BY genre");
+				ResultSet rs5 = contexteRequete5.executeQuery();
+
+				// Prepared statement pour les donnees dans la table article
+				// divers
+				PreparedStatement contexteRequete4 = cx.prepareStatement(
+						"SELECT * FROM articledivers d INNER JOIN Article a ON (d.reference=a.reference) WHERE caracteristique LIKE '%"
+								+ critere + "%' ORDER BY caracteristique");
+				ResultSet rs4 = contexteRequete4.executeQuery();
 
 				while (rs3.next()) {
-					
-					System.out.println("allo3");
 
+					System.out.println("allo3");
 
 					// On récupère dans les bases les attributs communs à tous
 					// les
 					// livres
 
 					String ref = rs3.getString("reference");
-					System.out.println("ref: "+ref);
+					System.out.println("ref: " + ref);
 					Double prixHT = rs3.getDouble("prixHT");
 
 					String nom = rs3.getString("nom");
@@ -223,7 +239,107 @@ public class ArticleDAOMySQL implements ArticleDAO {
 					}
 
 				}
+				while (rs4.next()) {
+
+					String ref = rs4.getString("reference");
+
+					Double prixHT = rs4.getDouble("prixHT");
+
+					String nom = rs4.getString("nom");
+
+					String description = rs4.getString("description");
+
+					String image = rs4.getString("image");
+
+					// Si l'article n'est pas un livre: article divers
+
+					String caracteristique = rs4.getString("caracteristique");
+
+					// article divers dematerialise
+
+					if (rs4.getString("format") == null) {
+
+						Etat etat = Etat.valueOf(rs4.getString("etat"));
+						int stock = rs4.getInt("stock");
+
+						double delaiLivraison = rs4.getDouble("delaiLivraison");
+
+						ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, etat, stock,
+								delaiLivraison, caracteristique);
+						mesArticles.add(divers);
+
+					}
+					// Si l'article divers est materialise
+
+					else {
+
+						String format = rs4.getString("format");
+
+						String url = rs4.getString("url");
+
+						ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, format, url,
+								caracteristique);
+						mesArticles.add(divers);
+
+					}
+
+				}
+				while (rs5.next()) {
+
+
+					// On récupère dans les bases les attributs communs à tous
+					// les
+					// livres
+
+					String ref = rs5.getString("reference");
+					System.out.println("ref: " + ref);
+					Double prixHT = rs5.getDouble("prixHT");
+
+					String nom = rs5.getString("nom");
+
+					String description = rs5.getString("description");
+
+					String image = rs5.getString("image");
+
+					LocalDate dateParution = rs5.getDate("dateParution").toLocalDate();
+					String auteur = rs5.getString("auteur");
+					String editeur = rs5.getString("editeur");
+					String genre = rs5.getString("genre");
+
+					// Si l'article est un livre materialise
+					if (rs5.getString("format") == null) {
+
+						String isbn = rs5.getString("isbn");
+
+						Etat etat = Etat.valueOf(rs5.getString("etat"));
+						int stock = rs5.getInt("stock");
+						double delaiLivraison = rs5.getDouble("delaiLivraison");
+
+						Livre livre = new Livre(ref, prixHT, nom, description, image, etat, stock, delaiLivraison, isbn,
+								dateParution, auteur, editeur, genre);
+
+						System.out.println(livre);
+						mesArticles.add(livre);
+
+					}
+					// Si le livre est un livre dematerialise
+					else {
+
+						String format = rs5.getString("format");
+
+						String url = rs5.getString("url");
+
+						Livre livre = new Livre(ref, prixHT, nom, description, image, format, url, dateParution, auteur,
+								editeur, genre);
+
+						mesArticles.add(livre);
+
+					}
+
+				}
+
 			}
+
 		}
 
 		catch (

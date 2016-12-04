@@ -30,17 +30,19 @@ public class Panier {
 
 			int index = lignesPanier.indexOf(lp);
 
+			int quantiteArticlePanier = this.lignesPanier.get(index).getQuantite();
+
 			// Test si l'article est matérialisé
 
 			if (a.getDemat() == null) {
 
 				// On teste pour voir si le stock est superieur a la quantite
 
-				if (a.getMateriel().getStock() >= quantite) {
+				if (quantiteArticlePanier < a.getMateriel().getStock()) {
 
 					// On augmente la quantite dans le panier
 					int quantiteL = lignesPanier.get(index).getQuantite();
-					lignesPanier.get(index).setQuantite (quantiteL+quantite);
+					lignesPanier.get(index).setQuantite(quantiteL + quantite);
 
 				}
 
@@ -58,7 +60,7 @@ public class Panier {
 
 				// On augmente la quantite
 				int quantiteL = lignesPanier.get(index).getQuantite();
-				lignesPanier.get(index).setQuantite (quantiteL+quantite);
+				lignesPanier.get(index).setQuantite(quantiteL + quantite);
 			}
 
 		}
@@ -99,20 +101,16 @@ public class Panier {
 	}
 
 	public void supprimerArticle(Article a) {
-		
+
 		int quantite = 0;
 		LignePanier lp = new LignePanier(a, quantite);
-	
 
-		
+		if (this.lignesPanier.contains(lp)) {
 
-			if (this.lignesPanier.contains(lp)) {
+			this.lignesPanier.remove(lp);
 
-				this.lignesPanier.remove(lp);
+		}
 
-			}
-
-		
 	}
 
 	public void modifierQuantite(Article a, int quantite) throws IllegalArgumentException {
@@ -129,6 +127,11 @@ public class Panier {
 
 			this.lignesPanier.get(index).setQuantite(quantite);
 
+		}
+		if(quantite==0){
+			
+			supprimerArticle(a);
+			
 		}
 
 	}
