@@ -59,9 +59,12 @@ public class CompteDAOMySQL implements CompteDAO {
 
 				String email = rs.getString("email");
 				String motdepasse = rs.getString("motdepasse");
+				String nom= rs.getString("nom");
+				String prenom= rs.getString("prenom");
+				String adresse= rs.getString("adresse");
 	
 
-				 compte = new Compte(email, motdepasse);
+				 compte = new Compte(email, motdepasse, nom, prenom, adresse);
 				
 			}
 		

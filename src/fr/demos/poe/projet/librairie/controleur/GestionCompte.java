@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.demos.poe.projet.librairie.data.ArticleDAOMySQL;
+import fr.demos.poe.projet.librairie.data.CompteDAO;
 import fr.demos.poe.projet.librairie.data.CompteDAOMySQL;
+import fr.demos.poe.projet.librairie.metier.Compte;
 
 /**
  * Servlet implementation class GestionCompte
@@ -41,7 +43,7 @@ public class GestionCompte extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
 
 	/**
@@ -50,36 +52,28 @@ public class GestionCompte extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
+		CompteDAOMySQL compteDAO = new CompteDAOMySQL();
+
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		String resultat;
 		Map<String, String> erreurs = new HashMap<String, String>();
-		
+
 		PrintWriter out = response.getWriter();
-		
-		if (action != null && action.equals("Deconnexion")){
-			
+
+
+		if (action != null && action.equals("Deconnexion")) {
 
 			session.invalidate();
 			RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 			rd.forward(request, response);
-			
-			
+
 		}
 
-		
 		if (action != null && action.equals("Connexion")) {
-			
 
 			String email = request.getParameter(CHAMP_EMAIL);
 			String motdepasse = request.getParameter(CHAMP_MOTDEPASSE);
-			
-		
-			
-			CompteDAOMySQL compteDAO;
-			
 
 			try {
 
@@ -107,24 +101,21 @@ public class GestionCompte extends HttpServlet {
 				resultat = "OK: Succes de l'identification";
 				request.setAttribute(ERR, erreurs);
 				request.setAttribute(RES, resultat);
-				
-			
-				
+
 				try {
-					compteDAO = new CompteDAOMySQL();
+					Authentification(email, motdepasse);
+
 					session.setAttribute("monCompte", compteDAO.select(email, motdepasse));
-					
-					
-					
-				} catch (Exception e1) {
+
+				}
+
+				catch (Exception e1) {
 
 					e1.printStackTrace();
 				}
-				
 
 				RequestDispatcher rd = request.getRequestDispatcher("/CompteVue.jsp");
 				rd.forward(request, response);
-				
 
 			} else {
 
@@ -135,9 +126,10 @@ public class GestionCompte extends HttpServlet {
 
 				RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 				rd.forward(request, response);
-				
+
 			}
 		}
+
 	}
 
 	private void validationEmail(String email) throws Exception {
@@ -166,4 +158,15 @@ public class GestionCompte extends HttpServlet {
 
 		}
 	}
+
+	private void Authentification(String email, String motdepasse) throws Exception {
+
+		Compte compteTest = CompteDAO.select(email, motdepasse);
+		if (!compteTest.getEmail().equals(email) && !compteTest.getMotdepasse().equals(motdepasse)) {
+
+			throw new Exception("Combinaison mot de passe invalide!");
+
+		}
+	}
+
 }
