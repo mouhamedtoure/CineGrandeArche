@@ -169,9 +169,10 @@ public class Panier {
 
 		for (LignePanier lp : this.lignesPanier) {
 
-			prixTotal += Math.rint((((lp.getArticle().getPrixHT() * (lp.getQuantite())) * 100)) / 100);
+			prixTotal += lp.getArticle().getPrixHT() * lp.getQuantite();
 		}
 
+		prixTotal = Math.rint(prixTotal*100)/100;
 		return prixTotal;
 	}
 

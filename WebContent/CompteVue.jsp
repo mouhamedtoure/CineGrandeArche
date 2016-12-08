@@ -16,12 +16,7 @@
 				Grande Arche </strong></a>
 
 		<form id="identification" action="GestionCompte" method="POST">
-			<label for="email">Adresse email</label> <input type="text"
-				value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
-			<label for="motdepasse">Mot de passe</label> <input type="password"
-				value="${param.motdepasse}" name="motdepasse" /> <span
-				class="erreur">${erreurs['motdepasse']}</span> <input type="submit"
-				value="Connexion" name="action" />  &nbsp; <a id="inscrire" href=""> <strong> S'incrire</strong></a>
+			<input type="submit" value="Deconnexion" name="action" /> Bienvenue ${monCompte.getPrenom()}!
 
 
 		</form>

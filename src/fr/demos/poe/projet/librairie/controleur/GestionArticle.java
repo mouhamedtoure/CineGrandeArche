@@ -23,9 +23,7 @@ import fr.demos.poe.projet.librairie.metier.*;
 public class GestionArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+
 	public GestionArticle() {
 		super();
 

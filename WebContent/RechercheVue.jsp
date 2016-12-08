@@ -33,16 +33,12 @@
 
 	</div>
 
-		<form id="rechercheArticle" action="GestionRecherche" method="POST">
+	<form id="rechercheArticle" action="GestionRecherche" method="POST">
 
 		<label for="rechercher"></label> <input type="text"
 			value="${Rechercher}" name="rechercher" /> <span class="rechercher"></span>
 		<input type="submit" value="Rechercher" name="action" /> <span
-			class="erreur"> ${erreursR['rechercher']} </span> <br> <input
-			type="radio" name="choix" value="auteur" checked />Auteur <input
-			type="radio" name="choix" value="nom" />Nom de l'article <input
-			type="radio" name="choix" value="editeur" />Editeur <input
-			type="radio" name="choix" value="genre" />Genre
+			class="erreur"> ${erreursR['rechercher']} </span> <br>
 
 	</form>
 

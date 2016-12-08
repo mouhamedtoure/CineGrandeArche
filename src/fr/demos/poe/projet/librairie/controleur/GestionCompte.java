@@ -1,6 +1,7 @@
 package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.demos.poe.projet.librairie.data.ArticleDAOMySQL;
+import fr.demos.poe.projet.librairie.data.CompteDAOMySQL;
 
 /**
  * Servlet implementation class GestionCompte
@@ -36,8 +41,7 @@ public class GestionCompte extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -46,15 +50,36 @@ public class GestionCompte extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		
+		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		String resultat;
 		Map<String, String> erreurs = new HashMap<String, String>();
+		
+		PrintWriter out = response.getWriter();
+		
+		if (action != null && action.equals("Deconnexion")){
+			
 
+			session.invalidate();
+			RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
+			rd.forward(request, response);
+			
+			
+		}
+
+		
 		if (action != null && action.equals("Connexion")) {
+			
 
 			String email = request.getParameter(CHAMP_EMAIL);
 			String motdepasse = request.getParameter(CHAMP_MOTDEPASSE);
+			
+		
+			
+			CompteDAOMySQL compteDAO;
+			
 
 			try {
 
@@ -82,10 +107,24 @@ public class GestionCompte extends HttpServlet {
 				resultat = "OK: Succes de l'identification";
 				request.setAttribute(ERR, erreurs);
 				request.setAttribute(RES, resultat);
+				
+			
+				
+				try {
+					compteDAO = new CompteDAOMySQL();
+					session.setAttribute("monCompte", compteDAO.select(email, motdepasse));
+					
+					
+					
+				} catch (Exception e1) {
 
-				RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
+					e1.printStackTrace();
+				}
+				
+
+				RequestDispatcher rd = request.getRequestDispatcher("/CompteVue.jsp");
 				rd.forward(request, response);
-				return;
+				
 
 			} else {
 
@@ -94,9 +133,9 @@ public class GestionCompte extends HttpServlet {
 				request.setAttribute(ERR, erreurs);
 				request.setAttribute(RES, resultat);
 
-				RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 				rd.forward(request, response);
-				return;
+				
 			}
 		}
 	}

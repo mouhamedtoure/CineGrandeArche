@@ -45,7 +45,7 @@
 	article(s)
 	
 	
-
+<c:if test="${not empty monPanier}">
 <c:if test="${monPanier.getNbArticles()!=0}">
 	
 		<table>
@@ -109,7 +109,7 @@
 
 		</table>
 	</c:if>
-
+</c:if>
 
 </body>
 </html>

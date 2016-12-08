@@ -169,25 +169,19 @@ public class ArticleDAOMySQL implements ArticleDAO {
 				// Prepared statement pour la recherche dans la base de données
 				PreparedStatement contexteRequete3 = cx.prepareStatement(
 						"SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference) WHERE UPPER(auteur) LIKE UPPER('%"
-								+ critere + "%') ORDER BY auteur");
+								+ critere + "%') OR UPPER(genre) LIKE UPPER('%" + critere
+								+ "%') OR UPPER(nom) LIKE UPPER('%" + critere + "%') OR UPPER(editeur) LIKE UPPER('%"
+								+ critere + "%')");
 				ResultSet rs3 = contexteRequete3.executeQuery();
-
-				// Prepared statement pour recherche selon le gnere
-				PreparedStatement contexteRequete5 = cx.prepareStatement(
-						"SELECT * FROM Livre l INNER JOIN Article a ON (l.reference=a.reference) WHERE UPPER(genre) LIKE UPPER('%"
-								+ critere + "%') ORDER BY genre");
-				ResultSet rs5 = contexteRequete5.executeQuery();
 
 				// Prepared statement pour les donnees dans la table article
 				// divers
 				PreparedStatement contexteRequete4 = cx.prepareStatement(
 						"SELECT * FROM articledivers d INNER JOIN Article a ON (d.reference=a.reference) WHERE caracteristique LIKE '%"
-								+ critere + "%' ORDER BY caracteristique");
+								+ critere + "%' OR UPPER(nom) LIKE UPPER('%" + critere + "%')");
 				ResultSet rs4 = contexteRequete4.executeQuery();
 
 				while (rs3.next()) {
-
-					System.out.println("allo3");
 
 					// On récupère dans les bases les attributs communs à tous
 					// les
@@ -280,59 +274,6 @@ public class ArticleDAOMySQL implements ArticleDAO {
 						ArticleDivers divers = new ArticleDivers(ref, prixHT, nom, description, image, format, url,
 								caracteristique);
 						mesArticles.add(divers);
-
-					}
-
-				}
-				while (rs5.next()) {
-
-
-					// On récupère dans les bases les attributs communs à tous
-					// les
-					// livres
-
-					String ref = rs5.getString("reference");
-					System.out.println("ref: " + ref);
-					Double prixHT = rs5.getDouble("prixHT");
-
-					String nom = rs5.getString("nom");
-
-					String description = rs5.getString("description");
-
-					String image = rs5.getString("image");
-
-					LocalDate dateParution = rs5.getDate("dateParution").toLocalDate();
-					String auteur = rs5.getString("auteur");
-					String editeur = rs5.getString("editeur");
-					String genre = rs5.getString("genre");
-
-					// Si l'article est un livre materialise
-					if (rs5.getString("format") == null) {
-
-						String isbn = rs5.getString("isbn");
-
-						Etat etat = Etat.valueOf(rs5.getString("etat"));
-						int stock = rs5.getInt("stock");
-						double delaiLivraison = rs5.getDouble("delaiLivraison");
-
-						Livre livre = new Livre(ref, prixHT, nom, description, image, etat, stock, delaiLivraison, isbn,
-								dateParution, auteur, editeur, genre);
-
-						System.out.println(livre);
-						mesArticles.add(livre);
-
-					}
-					// Si le livre est un livre dematerialise
-					else {
-
-						String format = rs5.getString("format");
-
-						String url = rs5.getString("url");
-
-						Livre livre = new Livre(ref, prixHT, nom, description, image, format, url, dateParution, auteur,
-								editeur, genre);
-
-						mesArticles.add(livre);
 
 					}
 

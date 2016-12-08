@@ -53,100 +53,55 @@ public class GestionRecherche extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
-		String choix = request.getParameter("choix");
 		Map<String, String> erreursR = new HashMap<String, String>();
-
-		out.println("choix : " + choix);
 
 		if (action != null && action.equals("Rechercher")) {
 
-			if (choix != null && choix.equals("auteur")) {
+			String rechercher = request.getParameter(CHAMP_RECHERCHE);
 
-				String rechercher = request.getParameter(CHAMP_RECHERCHE);
+			out.println(rechercher);
 
-				out.println(rechercher);
+			try {
+
+				validationRecherche(rechercher);
+
+			} catch (Exception e) {
+
+				String er1 = e.getMessage();
+				erreursR.put(CHAMP_RECHERCHE, er1);
+
+			}
+			if (erreursR.isEmpty()) {
+
+				request.setAttribute("erreursR", erreursR);
 
 				try {
-
-					validationRechercheAuteur(rechercher);
+					ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
+					session.setAttribute("mesArticles", articleDAO.select(rechercher));
 
 				} catch (Exception e) {
 
-					String er1 = e.getMessage();
-					erreursR.put(CHAMP_RECHERCHE, er1);
-
+					e.printStackTrace();
 				}
-				if (erreursR.isEmpty()) {
 
-					request.setAttribute("erreursR", erreursR);
+			} else {
 
-					try {
-						ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
-						session.setAttribute("mesArticles", articleDAO.select(rechercher));
+				request.setAttribute("erreursR", erreursR);
+				RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
+				rd.forward(request, response);
 
-						RequestDispatcher rd = request.getRequestDispatcher("/RechercheVue.jsp");
-						rd.forward(request, response);
-
-					} catch (Exception e) {
-
-						e.printStackTrace();
-					}
-
-				} else {
-
-					request.setAttribute("erreursR", erreursR);
-					RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
-					rd.forward(request, response);
-
-				}
 			}
 
-			if (choix != null && choix.equals("genre")) {
-
-				String rechercher = request.getParameter(CHAMP_RECHERCHE);
-
-				out.println(rechercher);
-
-				try {
-
-					validationRechercheAuteur(rechercher);
-
-				} catch (Exception e) {
-
-					String er1 = e.getMessage();
-					erreursR.put(CHAMP_RECHERCHE, er1);
-
-				}
-				if (erreursR.isEmpty()) {
-
-					request.setAttribute("erreursR", erreursR);
-
-					try {
-						ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
-						session.setAttribute("mesArticles", articleDAO.select(rechercher));
-
-						RequestDispatcher rd = request.getRequestDispatcher("/RechercheVue.jsp");
-						rd.forward(request, response);
-
-					} catch (Exception e) {
-
-						e.printStackTrace();
-					}
-
-				} else {
-
-					request.setAttribute("erreursR", erreursR);
-					RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
-					rd.forward(request, response);
-
-				}
-			}
+			RequestDispatcher rd = request.getRequestDispatcher("/RechercheVue.jsp");
+			rd.forward(request, response);
 
 		}
+		
+		
 
 	}
 
-	private void validationRechercheAuteur(String rechercher) throws Exception {
+	private void validationRecherche(String rechercher) throws Exception {
 
 		if (rechercher != null && rechercher.trim().length() < 3) {
 
