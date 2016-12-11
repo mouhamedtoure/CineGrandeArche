@@ -17,11 +17,15 @@
 
 		<form id="identification" action="GestionCompte" method="POST">
 			<label for="email">Adresse email</label> <input type="text"
-				value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
+				value="${param.email}" name="email" /> <span class="erreur">${erreursForm['email']}</span>
 			<label for="motdepasse">Mot de passe</label> <input type="password"
 				value="${param.motdepasse}" name="motdepasse" /> <span
-				class="erreur">${erreurs['motdepasse']}</span> <input type="submit"
-				value="Connexion" name="action" />  &nbsp; <a id="inscrire" href=""> <strong> S'incrire</strong></a>
+				class="erreur">${erreursForm['motdepasse']}</span> <input
+				type="submit" value="Connexion" name="action" />
+			<c:if test="${not empty erreursAuth}">
+				<span class="erreur"> ${erreursAuth} </span>
+			</c:if>
+			&nbsp; <a id="inscrire" href=""> <strong> S'incrire</strong></a>
 
 
 		</form>
@@ -65,7 +69,9 @@
 					<form action="GestionArticle" method="post">
 
 						<input type="hidden" name="Reference" value="${article.ref}" /> <input
-							type="submit" value="Ajouter" name="action" />
+							type="submit" value="Ajouter" name="action"
+							<c:if test="${not empty article.getDemat() }">  </c:if> />
+
 					</form>
 				<td><span class="erreurs0">${erreurs0[article.ref]}</span></td>
 			</tr>

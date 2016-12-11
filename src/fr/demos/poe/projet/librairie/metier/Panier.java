@@ -58,9 +58,10 @@ public class Panier {
 			// Sinon l'article est dématérialisé
 			else {
 
-				// On augmente la quantite
-				int quantiteL = lignesPanier.get(index).getQuantite();
-				lignesPanier.get(index).setQuantite(quantiteL + quantite);
+				// On n'augmente pas la quantite
+				
+//				int quantiteL = lignesPanier.get(index).getQuantite();
+//				lignesPanier.get(index).setQuantite(quantiteL + quantite);
 			}
 
 		}

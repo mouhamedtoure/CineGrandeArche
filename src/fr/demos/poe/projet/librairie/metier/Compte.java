@@ -7,12 +7,6 @@ public class Compte {
 	String nom;
 	String prenom;
 	String adresse;
-
-	
-	public Compte() {
-		super();
-	}
-	
 	
 
 	public Compte(String email, String motdepasse) {
@@ -20,8 +14,6 @@ public class Compte {
 		this.email = email;
 		this.motdepasse = motdepasse;
 	}
-
-
 
 	public Compte(String email, String motDePasse, String nom, String prenom, String adresse) {
 		this.email = email;
@@ -70,15 +62,6 @@ public class Compte {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
-	public String getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-
 
 
 }

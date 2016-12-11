@@ -42,41 +42,43 @@ public class CompteDAOMySQL implements CompteDAO {
 	}
 
 	@Override
-	public Compte select(String mail, String pwd) {
+	public Compte select(String email, String motdepasse) {
 
-		
-		Compte compte = new Compte();
+		Compte compte = null;
 		try {
 			Connection cx = dataSource.getConnection();
 
 			// Prepared statement pour les donnees dans la table livre
-			PreparedStatement contexteRequete = cx.prepareStatement("SELECT * FROM Compte WHERE email='%"
-								+ mail + "%'");
-
+			PreparedStatement contexteRequete = cx
+					.prepareStatement("SELECT * FROM Compte WHERE email=? and motdepasse=?");
+			contexteRequete.setString(1, email);
+			contexteRequete.setString(2, motdepasse);
+			
 			ResultSet rs = contexteRequete.executeQuery();
 
 			while (rs.next()) {
 
-				String email = rs.getString("email");
-				String motdepasse = rs.getString("motdepasse");
-				String nom= rs.getString("nom");
-				String prenom= rs.getString("prenom");
-				String adresse= rs.getString("adresse");
+
 	
 
-				 compte = new Compte(email, motdepasse, nom, prenom, adresse);
-				
-			}
+				String MonEmail = rs.getString("email");
+				String MonMotdepasse = rs.getString("motdepasse");
+				String MonNom= rs.getString("nom");
+				String MonPrenom= rs.getString("prenom");
+				String MonAdresse= rs.getString("adresse");
 		
+				
+				compte = new Compte(MonEmail, MonMotdepasse, MonNom, MonPrenom, MonAdresse);
+
+			}
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		
+
 		return compte;
 
-		
 	}
 
 }

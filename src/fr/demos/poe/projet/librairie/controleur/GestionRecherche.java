@@ -2,7 +2,6 @@ package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.demos.poe.projet.librairie.data.ArticleDAOMySQL;
-import fr.demos.poe.projet.librairie.metier.Article;
-import fr.demos.poe.projet.librairie.metier.StockException;
 
 /**
  * Servlet implementation class GestionRecherche

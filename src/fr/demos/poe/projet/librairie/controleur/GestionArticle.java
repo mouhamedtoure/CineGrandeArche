@@ -19,7 +19,7 @@ import fr.demos.poe.projet.librairie.metier.*;
 /**
  * Servlet implementation class GestionArticle
  */
-@WebServlet("/GestionArticle")
+@WebServlet(name="Accueil",urlPatterns={"/GestionArticle"})
 public class GestionArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -97,11 +97,19 @@ public class GestionArticle extends HttpServlet {
 			}
 
 		}
+		
+		
 
 		request.setAttribute("erreurs0", erreurs0);
 		session.setAttribute("compteurPanier", panier.getCompteur());
-		RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
-		rd.forward(request, response);
+		
+	
+		
+			RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
+			rd.forward(request, response);
+			
+		
+
 	}
 
 }

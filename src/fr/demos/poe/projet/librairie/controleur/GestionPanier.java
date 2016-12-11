@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -117,6 +116,16 @@ public class GestionPanier extends HttpServlet {
 			}
 
 		}
+		
+		if (action != null && action.equals("Vider")) {
+			// le panier existe peut-être déjà , utiliser une session
+			
+			
+
+			panier.vider();
+
+		}
+
 
 		request.setAttribute("erreurs0", erreurs0);
 		session.setAttribute("compteurPanier", panier.getCompteur());
