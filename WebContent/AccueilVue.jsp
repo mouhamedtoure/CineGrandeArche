@@ -25,7 +25,7 @@
 			<c:if test="${not empty erreursAuth}">
 				<span class="erreur"> ${erreursAuth} </span>
 			</c:if>
-			&nbsp; <a id="inscrire" href=""> <strong> S'incrire</strong></a>
+			&nbsp; <a id="inscrire" href="InscriptionVue.jsp"> <strong> S'incrire</strong></a>
 
 
 		</form>
