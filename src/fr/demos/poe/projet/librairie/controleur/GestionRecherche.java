@@ -22,7 +22,7 @@ import fr.demos.poe.projet.librairie.data.ArticleDAOMySQL;
 public class GestionRecherche extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	String CHAMP_RECHERCHE = "rechercher";
+	private static final String CHAMP_RECHERCHE = "rechercher";
 
 	/**
 	 * @see HttpServlet#HttpServlet()

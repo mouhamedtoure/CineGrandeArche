@@ -9,6 +9,12 @@ public class Compte {
 	String adresse;
 	
 
+	@Override
+	public String toString() {
+		return "Compte [email=" + email + ", motdepasse=" + motdepasse + ", nom=" + nom + ", prenom=" + prenom
+				+ ", adresse=" + adresse + "]";
+	}
+
 	public Compte(String email, String motdepasse) {
 		super();
 		this.email = email;

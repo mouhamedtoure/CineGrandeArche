@@ -104,11 +104,17 @@ public class GestionArticle extends HttpServlet {
 		session.setAttribute("compteurPanier", panier.getCompteur());
 		
 	
-		
+		if(panier.getCompte()==null)
+		{
 			RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 			rd.forward(request, response);
 			
-		
+		}
+		else
+		{
+			RequestDispatcher rd = request.getRequestDispatcher("/CompteVue.jsp");
+			rd.forward(request, response);
+		}
 
 	}
 

@@ -47,10 +47,6 @@
 
 		<tr>
 
-
-
-
-
 		</tr>
 		<c:forEach items="${mesArticles}" var="article">
 			<tr>

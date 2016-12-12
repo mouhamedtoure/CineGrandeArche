@@ -13,36 +13,43 @@
 		<a id="Accueil" href="AccueilVue.jsp"> <strong>Cine
 				Grande Arche </strong></a>
 
+		<c:choose>
+			<c:when test="${not empty monCompte}">
+				<form id="identification" action="GestionCompte" method="POST">
+					<input type="submit" value="Deconnexion" name="action" />
+					Bienvenue ${monCompte.getPrenom()}!
+
+				</form>
+			</c:when>
 
 
-		<form id="identification" action="GestionArticle" method="POST">
-			<label for="email">Adresse email</label> <input type="text"
-				value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
-			<label for="motdepasse">Mot de passe</label> <input type="password"
-				value="${param.motdepasse}" name="motdepasse" /> <span
-				class="erreur">${erreurs['motdepasse']}</span> <input type="submit"
-				value="Connexion" name="action" />
+			<c:otherwise>
+				<form id="identification" action="GestionArticle" method="POST">
+					<label for="email">Adresse email</label> <input type="text"
+						value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
+					<label for="motdepasse">Mot de passe</label> <input type="password"
+						value="${param.motdepasse}" name="motdepasse" /> <span
+						class="erreur">${erreurs['motdepasse']}</span> <input
+						type="submit" value="Connexion" name="action" />
 
+				</form>
+			</c:otherwise>
+		</c:choose>
 
-		</form>
-
-
-		<form id="rechercheArticle" action="" method="POST">
-
-			<label for="rechercher"></label> <input type="text"
-				value="${Rechercher}" name="rechercher" /> <span class="rechercher"></span>
-			<input type="submit" value="Rechercher" name="action" />
-
-		</form>
 
 	</div>
 
+	<form id="rechercheArticle" action="GestionRecherche" method="POST">
 
+		<label for="rechercher"></label> <input type="text"
+			value="${Rechercher}" name="rechercher" /> <span class="rechercher"></span>
+		<input type="submit" value="Rechercher" name="action" /> <span
+			class="erreur"> ${erreursR['rechercher']} </span> <br>
 
+	</form>
 
-
-	Voici votre panier! Vous disposez de ${monPanier.getNbArticles()}
-	article(s) &nbsp;
+	<br /> Voici votre panier! Vous disposez de
+	${monPanier.getNbArticles()} article(s) &nbsp;
 	<form id="viderPanier" action="GestionPanier" method="POST">
 		<input type="submit" value="Vider" name="action" />
 

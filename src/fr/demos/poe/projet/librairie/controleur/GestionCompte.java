@@ -54,15 +54,27 @@ public class GestionCompte extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+		PrintWriter out = response.getWriter();
+
+		Panier panier = (Panier) session.getAttribute("monPanier");
 
 		Map<String, String> erreursForm = new HashMap<String, String>();
 		ArrayList<String> erreursAuth = new ArrayList<>();
 
-
-
 		if (action != null && action.equals("Deconnexion")) {
 
 			session.invalidate();
+
+			try {
+
+				ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
+				session.setAttribute("mesArticles", articleDAO.select(null));
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+
 			RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 			rd.forward(request, response);
 
@@ -94,32 +106,35 @@ public class GestionCompte extends HttpServlet {
 
 			}
 
-
 			request.setAttribute(ERRFORM, erreursForm);
 
+			out.println(erreursForm);
 
 			if (erreursForm.isEmpty()) {
-				
-				 try {
-				
-				 Authentification aut = new Authentification();
-				
-				 Compte compteT = aut.login(email, motdepasse);
-				 
-				 
-				
-				 session.setAttribute("monCompte", compteT);
 
-				
-				 } catch (MyLoginException e) {
-				 erreursAuth.add(e.getMessage());
-				
-				 }
-				 request.setAttribute(ERRAUTH, erreursAuth);
+				try {
+
+					Authentification aut = new Authentification();
+
+					Compte compteT = aut.login(email, motdepasse);
+
+					panier.setCompte(compteT);
+
+					session.setAttribute("monCompte", compteT);
+
+				} catch (MyLoginException e) {
+
+					erreursAuth.add(e.getMessage());
+
+				}
+				request.setAttribute(ERRAUTH, erreursAuth);
 
 				if (erreursForm.isEmpty() && erreursAuth.isEmpty()) {
 
 					RequestDispatcher rd = request.getRequestDispatcher("/CompteVue.jsp");
+					rd.forward(request, response);
+				} else {
+					RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 					rd.forward(request, response);
 				}
 			}

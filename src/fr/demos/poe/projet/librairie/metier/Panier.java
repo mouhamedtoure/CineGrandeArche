@@ -155,6 +155,12 @@ public class Panier {
 	public Compte getCompte() {
 		return compte;
 	}
+	
+	
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
+	}
 
 	@Override
 
