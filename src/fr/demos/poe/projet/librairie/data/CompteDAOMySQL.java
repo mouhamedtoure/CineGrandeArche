@@ -9,6 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.mysql.jdbc.Statement;
+
 import fr.demos.poe.projet.librairie.metier.Compte;
 
 public class CompteDAOMySQL implements CompteDAO {
@@ -24,9 +26,24 @@ public class CompteDAOMySQL implements CompteDAO {
 	}
 
 	@Override
-	public void insert(Compte c) throws Exception {
+	public void insert(String email, String motdepasse, String nom, String prenom, String adresse) throws Exception {
 		// TODO Auto-generated method stub
 
+		
+
+		Connection cx = dataSource.getConnection();
+		Statement statement = (Statement) cx.createStatement();
+
+
+		/* Exécution d'une requête d'écriture */
+		
+		statement.executeUpdate("INSERT INTO  compte (email, motdepasse, nom, prenom, adresse) VALUES ('"+email+"','"+motdepasse+ "','"+nom+"','"+prenom+"','"+adresse+ "')");
+
+	
+		
+		
+
+	
 	}
 
 	@Override

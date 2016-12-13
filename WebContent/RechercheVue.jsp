@@ -10,28 +10,8 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="header">
 
-		<a id="Accueil" href="AccueilVue.jsp"> <strong>Cine
-				Grande Arche </strong></a>
-
-		<form id="identification" action="GestionArticle" method="POST">
-			<label for="email">Adresse email</label> <input type="text"
-				value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
-			<label for="motdepasse">Mot de passe</label> <input type="password"
-				value="${param.motdepasse}" name="motdepasse" /> <span
-				class="erreur">${erreurs['motdepasse']}</span> <input type="submit"
-				value="Connexion" name="action" />
-
-
-		</form>
-
-
-
-
-		<a id="Panier" href="PanierVue.jsp"> Panier (${compteurPanier})</a>
-
-	</div>
+<jsp:include page="/MenuInscription.jsp"/>
 
 	<form id="rechercheArticle" action="GestionRecherche" method="POST">
 

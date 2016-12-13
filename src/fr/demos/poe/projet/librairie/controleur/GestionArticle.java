@@ -19,10 +19,9 @@ import fr.demos.poe.projet.librairie.metier.*;
 /**
  * Servlet implementation class GestionArticle
  */
-@WebServlet(name="Accueil",urlPatterns={"/GestionArticle"})
+@WebServlet(name = "Accueil", urlPatterns = { "/GestionArticle" })
 public class GestionArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	public GestionArticle() {
 		super();
@@ -38,18 +37,15 @@ public class GestionArticle extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-
-		
 		try {
-			
-			ArticleDAOMySQL articleDAO= new ArticleDAOMySQL();
+
+			ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
 			session.setAttribute("mesArticles", articleDAO.select(null));
-			
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
-		
 
 		RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 		rd.forward(request, response);
@@ -63,6 +59,7 @@ public class GestionArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		RequestDispatcher rd;
 		HttpSession session = request.getSession();
 		Panier panier = (Panier) session.getAttribute("monPanier");
 		@SuppressWarnings("unchecked")
@@ -97,25 +94,39 @@ public class GestionArticle extends HttpServlet {
 			}
 
 		}
-		
-		
+
+		if (action != null && action.equals("Details")) {
+
+			for (Article a : articlesP) {
+
+				if (a.getRef().equals(reference)) {
+
+					int index = articlesP.indexOf(a);
+
+					Article ArticleAffiche = articlesP.get(index);
+					request.setAttribute("ArticleAffiche", ArticleAffiche);
+					rd = request.getRequestDispatcher("/DescriptionVue.jsp");
+
+				}
+
+			}
+
+			
+
+		}
 
 		request.setAttribute("erreurs0", erreurs0);
 		session.setAttribute("compteurPanier", panier.getCompteur());
-		
-	
-		if(panier.getCompte()==null)
-		{
-			RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
-			rd.forward(request, response);
-			
-		}
-		else
-		{
-			RequestDispatcher rd = request.getRequestDispatcher("/CompteVue.jsp");
-			rd.forward(request, response);
+
+		if (panier.getCompte() == null) {
+			rd = request.getRequestDispatcher("/AccueilVue.jsp");
+
+		} else {
+			rd = request.getRequestDispatcher("/CompteVue.jsp");
+
 		}
 
+		rd.forward(request, response);
 	}
 
 }

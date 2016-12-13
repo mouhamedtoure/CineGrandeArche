@@ -26,6 +26,7 @@ public class GestionCompte extends HttpServlet {
 	private static final String CHAMP_EMAIL = "email";
 	private static final String CHAMP_MOTDEPASSE = "motdepasse";
 	private static final String ERRFORM = "erreursForm";
+	private static final String ERRFORMINS = "erreursFormIns";
 	private static final String ERRAUTH = "erreursAuth";
 
 	/**
@@ -61,10 +62,63 @@ public class GestionCompte extends HttpServlet {
 		Map<String, String> erreursForm = new HashMap<String, String>();
 		ArrayList<String> erreursAuth = new ArrayList<>();
 
+		if (action != null && action.equals("Inscription")) {
+
+			String paramEmail = request.getParameter("email");
+			String paramMotdepasse = request.getParameter("motdepasse");
+			String paramNom = request.getParameter("nom");
+			String paramPrenom = request.getParameter("prenom");
+			String paramAdresse = request.getParameter("adresse");
+
+			try {
+
+				validationEmail(paramEmail);
+
+			} catch (Exception e) {
+
+				String er1 = e.getMessage();
+				erreursForm.put(CHAMP_EMAIL, er1);
+
+			}
+
+			try {
+				validationMotdepasse(paramMotdepasse);
+			} catch (Exception e) {
+
+				String er2 = e.getMessage();
+
+				erreursForm.put(CHAMP_MOTDEPASSE, er2);
+
+			}
+			request.setAttribute(ERRFORMINS, erreursForm);
+
+			if (erreursForm.isEmpty()) {
+
+				try {
+
+					CompteDAOMySQL compteDAO = new CompteDAOMySQL();
+					compteDAO.insert(paramEmail, paramMotdepasse, paramNom, paramPrenom, paramAdresse);
+
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+
+				RequestDispatcher rd = request.getRequestDispatcher("/ValidationInscription.jsp");
+				rd.forward(request, response);
+
+			} else {
+
+				RequestDispatcher rd = request.getRequestDispatcher("/InscriptionVue.jsp");
+				rd.forward(request, response);
+			}
+
+		}
+
 		if (action != null && action.equals("Deconnexion")) {
 
 			session.invalidate();
-
+			session = request.getSession();
 			try {
 
 				ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();

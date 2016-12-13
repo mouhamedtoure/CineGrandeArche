@@ -9,35 +9,9 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="header">
-		<a id="Accueil" href="AccueilVue.jsp"> <strong>Cine
-				Grande Arche </strong></a>
 
-		<c:choose>
-			<c:when test="${not empty monCompte}">
-				<form id="identification" action="GestionCompte" method="POST">
-					<input type="submit" value="Deconnexion" name="action" />
-					Bienvenue ${monCompte.getPrenom()}!
+<jsp:include page="/MenuInscription.jsp"/>
 
-				</form>
-			</c:when>
-
-
-			<c:otherwise>
-				<form id="identification" action="GestionArticle" method="POST">
-					<label for="email">Adresse email</label> <input type="text"
-						value="${param.email}" name="email" /> <span class="erreur">${erreurs['email']}</span>
-					<label for="motdepasse">Mot de passe</label> <input type="password"
-						value="${param.motdepasse}" name="motdepasse" /> <span
-						class="erreur">${erreurs['motdepasse']}</span> <input
-						type="submit" value="Connexion" name="action" />
-
-				</form>
-			</c:otherwise>
-		</c:choose>
-
-
-	</div>
 
 	<form id="rechercheArticle" action="GestionRecherche" method="POST">
 
