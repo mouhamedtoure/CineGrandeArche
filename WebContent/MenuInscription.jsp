@@ -6,7 +6,17 @@
 
 		<a id="accueil" href="AccueilVue.jsp"> <strong>Cine
 				Grande Arche </strong></a>
+	
+<c:choose>
+<c:when test="${not empty monPanier.getCompte()}">
+		
+		<form id="identification" action="GestionCompte" method="POST">
+			<input type="submit" value="Deconnexion" name="action" /> Bienvenue ${monCompte.getPrenom()}!
 
+		</form>
+
+</c:when>
+<c:otherwise>
 		<form id="identification" action="GestionCompte" method="POST">
 			<label for="email">Adresse email</label> <input type="text"
 				value="${param.email}" name="email" /> <span class="erreur">${erreursForm['email']}</span>
@@ -19,11 +29,11 @@
 			</c:if>
 			&nbsp; <a id="inscrire" href="InscriptionVue.jsp"> <strong> S'incrire</strong></a>
 
-
 		</form>
+		
+</c:otherwise>
 
-
-
+</c:choose>
 
 		<a id="panier" href="PanierVue.jsp"> Panier (${compteurPanier})</a>
 

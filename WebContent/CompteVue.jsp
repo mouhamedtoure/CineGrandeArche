@@ -10,23 +10,8 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="header">
-
-		<a id="accueil" href="AccueilVue.jsp"> <strong>Cine
-				Grande Arche </strong></a>
-
-		<form id="identification" action="GestionCompte" method="POST">
-			<input type="submit" value="Deconnexion" name="action" /> Bienvenue ${monCompte.getPrenom()}!
-
-
-		</form>
-
-
-
-
-		<a id="panier" href="PanierVue.jsp"> Panier (${compteurPanier})</a>
-
-	</div>
+<jsp:include page="/MenuInscription.jsp"/>
+	
 
 	<form id="rechercheArticle" action="GestionRecherche" method="POST">
 

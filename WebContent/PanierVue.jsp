@@ -38,11 +38,17 @@
 
 
 				<tr>
-					<th>Titre</th>
-					<th>Choix quantité</th>
-					<th>Quantité</th>
-					<th>Prix à l'unité</th>
-					<th>Suppression</th>
+					<th> Article &nbsp; </th>
+					
+					<th>Titre &nbsp; </th>
+	
+					<th>Choix quantité &nbsp;</th>
+			
+					<th>Quantité &nbsp; </th>
+			
+					<th>Prix à l'unité &nbsp;</th>
+			
+					<th>Suppression &nbsp;</th>
 
 
 					<td>Prix total: ${monPanier.getPrixTotal()}&euro;</td>
@@ -53,6 +59,14 @@
 
 				<c:forEach items="${monPanier.getListeAchat()}" var="lignePanier">
 					<tr>
+					<td><img src="<c:url value='Images/${lignePanier.article.getImage()}'/>"
+					width="178" height="268" />
+						
+						</td>
+					
+					
+					
+					
 						<td>${lignePanier.article.nom}
 							<form action="GestionPanier" method="post">
 								<input type="hidden" name="ModifierArticle"

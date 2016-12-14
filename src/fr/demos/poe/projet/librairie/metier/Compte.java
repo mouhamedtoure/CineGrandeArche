@@ -2,11 +2,11 @@ package fr.demos.poe.projet.librairie.metier;
 
 public class Compte {
 
-	String email;
-	String motdepasse;
-	String nom;
-	String prenom;
-	String adresse;
+	private String email;
+	private String motdepasse;
+	private String nom;
+	private String prenom;
+	private String adresse;
 	
 
 	@Override

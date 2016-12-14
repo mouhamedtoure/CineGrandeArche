@@ -1,7 +1,6 @@
 package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +50,6 @@ public class GestionPanier extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		int quantite = 0;
 

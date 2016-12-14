@@ -50,6 +50,7 @@ public class CineListerner implements ServletContextListener, HttpSessionListene
     	// Essayer de conserver le panier en memoire dans la base de donnees
     	
     	Panier panier = (Panier)arg0.getSession().getAttribute("monPanier");
+    	panier.vider();
     }
 
 	/**

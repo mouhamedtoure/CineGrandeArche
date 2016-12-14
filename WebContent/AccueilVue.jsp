@@ -25,7 +25,7 @@
 		<c:forEach items="${mesArticles}" var="article">
 			<tr>
 				<td><img src="<c:url value='Images/${article.getImage()}'/>"
-					width="178" height="268" /></td>
+					width="168" height="268" /></td>
 
 
 				<td>${article.nom}</td>
