@@ -37,8 +37,8 @@
 
 
 	</table>
-<strong>  <span style="text-decoration:underline;">	Description   </span> </strong>:
-
+<strong>  <span style="text-decoration:underline;">	Description   </span> </strong>
+<br>
 <br>
 <i> ${ArticleAffiche.getDescription()} </i>
  <br>

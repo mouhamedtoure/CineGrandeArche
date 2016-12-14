@@ -1,5 +1,4 @@
 html, body {
-
 	background-color: #F6F6F6;
 	font-family: Verdana, sans-serif;
 	font-size: 16px;
@@ -9,6 +8,8 @@ html, body {
 }
 
 /* HEADER */
+
+
 .header {
 	display: flex;
 	position: relative;
@@ -26,6 +27,9 @@ html, body {
 }
 
 form {
+	margin: 0;
+	padding: 0;
+	text-align: center;
 	display: inline-block;
 }
 
@@ -47,6 +51,8 @@ form .erreur {
 
 #accueil {
 	display: left;
+    text-decoration:none;
+    color: inherit;
 }
 
 #rechercheArticle {
@@ -67,52 +73,55 @@ td {
 	border-width: 3px;
 }
 
-
-form label {
-
-    float: left;
-
-    width: 200px;
-
-    margin: 3px 0px 0px 0px;
-
+form label[for=monEmail] {
+	float: left;
+	width: 200px;
+	margin: 3px 0px 0px 0px;
 }
 
+form label[for=monMotdepasse] {
+	float: left;
+	width: 200px;
+	margin: 3px 0px 0px 0px;
+}
+
+form label[for=nom] {
+	float: left;
+	width: 200px;
+	margin: 3px 0px 0px 0px;
+}
+
+form label[for=prenom] {
+	float: left;
+	width: 200px;
+	margin: 3px 0px 0px 0px;
+}
+
+form label[for=adresse] {
+	float: left;
+	width: 200px;
+	margin: 3px 0px 0px 0px;
+}
 
 form input {
-
-    margin: 10px 10px 0px 0px;
-
-    border: 1px #999 solid;
-
+	margin: 10px 10px 0px 0px;
+	border: 1px #999 solid;
 }
-
 
 form input.sansLabel {
-
-    margin-left: 200px;
-
+	margin-left: 200px;
 }
 
-
 form .requis {
-
-    color: #c00;
-
+	color: #c00;
 }
 
 fieldset {
-    padding: 10px;
-    border: 1px #0568CD solid;
+	padding: 10px;
+	border: 1px #0568CD solid;
 }
 
 legend {
-    font-weight: bold;
-    color: #0568CD;
-}
-
-#identification{
-	
-	text-align: left;
-	
+	font-weight: bold;
+	color: #0568CD;
 }

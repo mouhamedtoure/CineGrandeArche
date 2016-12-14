@@ -61,6 +61,9 @@
 
 						<input type="hidden" name="Reference" value="${article.ref}" /> <input
 							type="submit" value="Ajouter" name="action" />
+							<input type="hidden" name="Reference" value="${article.ref}" /> <input
+							type="submit" value="Details" name="action" />
+							
 					</form>
 				<td><span class="erreurs0">${erreurs0[article.ref]}</span></td>
 			</tr>

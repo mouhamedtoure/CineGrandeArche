@@ -31,10 +31,21 @@
 				<td>${article.nom}</td>
 				<td><c:if
 						test="${article.getClass().getSimpleName() == 'Livre' }"> ${article.auteur}  </c:if>
+						
+						<c:if
+						test="${article.getClass().getSimpleName() == 'ArticleDivers' }"> ${article.caracteristique}  </c:if>
+						
 				<td>${article.prixHT}&euro;</td>
 
-				<td> <c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if>
-					<form action="GestionArticle" method="post">
+				<td> <c:if test="${not empty article.getMateriel()}"> Stock: ${article.getMateriel().stock} </c:if> </td>
+				<td>
+				
+				</td>
+				<td>
+				
+				</td>
+				
+				<td>	<form action="GestionArticle" method="post"> 
 
 						<input type="hidden" name="Reference" value="${article.ref}" /> <input
 							type="submit" value="Ajouter" name="action" />
@@ -43,7 +54,9 @@
 							type="submit" value="Details" name="action" />
 
 					</form>
-				<td><span class="erreurs0">${erreurs0[article.ref]}</span></td>
+				
+				<td>
+				<span class="erreurs0">${erreurs0[article.ref]}</span>
 			</tr>
 
 

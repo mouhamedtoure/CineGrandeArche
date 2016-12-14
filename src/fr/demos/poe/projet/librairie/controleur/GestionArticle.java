@@ -1,6 +1,7 @@
 package fr.demos.poe.projet.librairie.controleur;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,8 +59,8 @@ public class GestionArticle extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		RequestDispatcher rd;
+		PrintWriter out = response.getWriter();
+		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		Panier panier = (Panier) session.getAttribute("monPanier");
 		@SuppressWarnings("unchecked")
@@ -68,6 +69,25 @@ public class GestionArticle extends HttpServlet {
 		String reference = request.getParameter("Reference");
 		String action = request.getParameter("action");
 		Map<String, String> erreurs0 = new HashMap<String, String>();
+
+		if (action != null && action.equals("Details")) {
+
+			for (Article a : articlesP) {
+
+				if (a.getRef().equals(reference)) {
+
+					int index = articlesP.indexOf(a);
+
+					out.println(articlesP.get(index));
+
+					request.setAttribute("ArticleAffiche", articlesP.get(index));
+					rd = request.getRequestDispatcher("/DescriptionVue.jsp");
+
+				}
+
+			}
+
+		}
 
 		if (action != null && action.equals("Ajouter")) {
 
@@ -85,48 +105,27 @@ public class GestionArticle extends HttpServlet {
 					} catch (StockException e1) {
 
 						erreurs0.put(reference, e1.getMessage());
-
+						request.setAttribute("erreurs0", erreurs0);
 					}
 
 					break;
 
 				}
+				
+			}
+			if (panier.getCompte() == null) {
+
+				rd = request.getRequestDispatcher("/AccueilVue.jsp");
+
+			} 
+			if(panier.getCompte()!=null)
+				{
+				rd = request.getRequestDispatcher("/CompteVue.jsp");
+
 			}
 
 		}
-
-		if (action != null && action.equals("Details")) {
-
-			for (Article a : articlesP) {
-
-				if (a.getRef().equals(reference)) {
-
-					int index = articlesP.indexOf(a);
-
-					Article ArticleAffiche = articlesP.get(index);
-					request.setAttribute("ArticleAffiche", ArticleAffiche);
-					rd = request.getRequestDispatcher("/DescriptionVue.jsp");
-
-				}
-
-			}
-
-			
-
-		}
-
-		request.setAttribute("erreurs0", erreurs0);
 		session.setAttribute("compteurPanier", panier.getCompteur());
-
-		if (panier.getCompte() == null) {
-			rd = request.getRequestDispatcher("/AccueilVue.jsp");
-
-		} else {
-			rd = request.getRequestDispatcher("/CompteVue.jsp");
-
-		}
-
 		rd.forward(request, response);
 	}
-
 }
