@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +29,7 @@ public class GestionCompte extends HttpServlet {
 	private static final String ERRFORM = "erreursForm";
 	private static final String ERRFORMINS = "erreursFormIns";
 	private static final String ERRAUTH = "erreursAuth";
-
+	@Inject private ArticleDAO dao;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -121,8 +122,8 @@ public class GestionCompte extends HttpServlet {
 			session = request.getSession();
 			try {
 
-				ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
-				session.setAttribute("mesArticles", articleDAO.select(null));
+				// ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
+				session.setAttribute("mesArticles", dao.select(null));
 
 			} catch (Exception e) {
 

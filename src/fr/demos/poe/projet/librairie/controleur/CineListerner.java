@@ -11,7 +11,7 @@ import fr.demos.poe.projet.librairie.data.ArticleDAO;
 import fr.demos.poe.projet.librairie.metier.Panier;
 
 /**
- * Application Lifecycle Listener implementation class AccueilListener
+ * Application Lifecycle Listener implementation class CineListener
  *
  */
 @WebListener
@@ -40,12 +40,14 @@ public class CineListerner implements ServletContextListener, HttpSessionListene
 	/**
 	 * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
 	 */
+	@SuppressWarnings("unused")
 	public void sessionDestroyed(HttpSessionEvent arg0) {
 		// TODO Auto-generated method stub
 
 		// Essayer de conserver le panier en memoire dans la base de donnees
 
 		Panier panier = (Panier) arg0.getSession().getAttribute("monPanier");
+	
 	}
 
 	/**
@@ -60,7 +62,7 @@ public class CineListerner implements ServletContextListener, HttpSessionListene
 	 */
 	public void contextInitialized(ServletContextEvent arg0) {
 
-		arg0.getServletContext().setAttribute("mesArticles", dao.select("camus"));
+		arg0.getServletContext().setAttribute("mesArticles", dao.select(""));
 
 	}
 

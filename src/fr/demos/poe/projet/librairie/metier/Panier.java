@@ -3,6 +3,9 @@ package fr.demos.poe.projet.librairie.metier;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.enterprise.context.SessionScoped;
+
+@SessionScoped
 public class Panier {
 
 	private Compte compte;
