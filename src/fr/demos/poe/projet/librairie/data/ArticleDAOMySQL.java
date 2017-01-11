@@ -7,8 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-// import javax.naming.*;
+import javax.naming.*;
 import javax.sql.DataSource;
 
 import fr.demos.poe.projet.librairie.metier.Article;
@@ -18,13 +17,12 @@ import fr.demos.poe.projet.librairie.metier.Livre;
 
 public class ArticleDAOMySQL implements ArticleDAO {
 
-	// private Context context;
-	@Resource(mappedName="java:comp/env/jdbc/CineGrandeArche")
+	private Context context;
 	private DataSource dataSource;
 
 	public ArticleDAOMySQL() throws Exception {
-//		context = new InitialContext();
-//		dataSource = (DataSource) context.lookup("java:comp/env/jdbc/CineGrandeArche");
+		context = new InitialContext();
+		dataSource = (DataSource) context.lookup("java:comp/env/jdbc/CineGrandeArche");
 	}
 
 	@Override

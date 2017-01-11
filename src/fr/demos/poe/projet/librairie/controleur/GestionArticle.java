@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-// import fr.demos.poe.projet.librairie.data.*;
+import fr.demos.poe.projet.librairie.data.*;
 import fr.demos.poe.projet.librairie.metier.*;
 
 /**
@@ -36,17 +36,17 @@ public class GestionArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		HttpSession session = request.getSession();
-//
-//		try {
-//
-//			ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
-//			// session.setAttribute("mesArticles", articleDAO.select(null));
-//
-//		} catch (Exception e) {
-//
-//			e.printStackTrace();
-//		}
+		HttpSession session = request.getSession();
+
+		try {
+
+			ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
+			// session.setAttribute("mesArticles", articleDAO.select(null));
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("/AccueilVue.jsp");
 		rd.forward(request, response);

@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.demos.poe.projet.librairie.data.ArticleDAO;
 import fr.demos.poe.projet.librairie.data.ArticleDAOMySQL;
 
 /**
@@ -23,7 +21,7 @@ import fr.demos.poe.projet.librairie.data.ArticleDAOMySQL;
 @WebServlet("/GestionRecherche")
 public class GestionRecherche extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Inject private ArticleDAO dao;
+
 	private static final String CHAMP_RECHERCHE = "rechercher";
 
 	/**
@@ -75,8 +73,8 @@ public class GestionRecherche extends HttpServlet {
 				request.setAttribute("erreursR", erreursR);
 
 				try {
-					// ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
-					session.setAttribute("mesArticles", dao.select(rechercher));
+					ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
+					session.setAttribute("mesArticles", articleDAO.select(rechercher));
 
 				} catch (Exception e) {
 
