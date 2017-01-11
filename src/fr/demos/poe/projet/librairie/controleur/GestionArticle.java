@@ -41,7 +41,7 @@ public class GestionArticle extends HttpServlet {
 		try {
 
 			ArticleDAOMySQL articleDAO = new ArticleDAOMySQL();
-			// session.setAttribute("mesArticles", articleDAO.select(null));
+			session.setAttribute("mesArticles", articleDAO.select(null));
 
 		} catch (Exception e) {
 
